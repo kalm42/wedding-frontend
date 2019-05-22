@@ -1,3 +1,81 @@
+@import '../shared/styles.scss';
+
+:root {
+  /* Use this color as the background for your dark-on-light designs, or the 
+  text color of an inverted design. */
+  --lightshade: #d9d7c5;
+  --lightshade-darker: #bfbeae;
+  --lightshade-lighter: #e6e3d1;
+  /* Accent colors can be used to bring attention to design elements by 
+  contrasting with the rest of the palette. */
+  --lightaccent: #323c59;
+  --lightaccent-darker: #394466;
+  --lightaccent-lighter: #242b40;
+  /* This color should be eye-catching but not harsh. Can be liberally applied 
+  to your layout as the main identity. */
+  --primary: #bf7b3f;
+  --primary-darker: #a66b37;
+  --primary-lighter: #cc8343;
+  /* Another accent color to consider. Not all colors have to be used sometimes 
+  a simple color scheme works best. */
+  --darkaccent: #bf3b3b;
+  --darkaccent-darker: #a63333;
+  --darkaccent-lighter: #cc3f3f;
+  /* Use as the text color for dark-on-light designs, or as the background for 
+  inverted designs. */
+  --darkshade: #0d0d0d;
+  --darkshade-darker: #000000;
+  --darkshade-lighter: #333333;
+  /* Other UI Styles and colors */
+  --grey: #cdcdc0;
+  --success: #7aa802;
+  --warning: #f77604;
+  --danger: #c60000;
+  --deepboxshadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
+    0 8px 10px -5px rgba(0, 0, 0, 0.2);
+  --shallowboxshadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  --maxwidth: 1000px;
+  --fontfamily: Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT',
+    'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma,
+    Geneva, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --borderradius: 5px;
+
+  /* scale for 1.2 */
+  --font-size-1: 1rem;
+  --font-size-2: 1.2rem;
+  --font-size-3: 1.44rem;
+  --font-size-4: 1.728rem;
+  --font-size-5: 2.074rem;
+  --font-size-6: 2.488rem;
+  /* scale for 1.2 */
+  --line-height-1: 1.2rem;
+  --line-height-2: 1.44rem;
+  --line-height-3: 1.728rem;
+  --line-height-4: 2.074rem;
+  --line-height-5: 2.488rem;
+  --line-height-6: 2.986rem;
+}
+
+@include min-tablet {
+  :root {
+    /* scale for 1.33 */
+    --font-size-1: 1rem;
+    --font-size-2: 1.333rem;
+    --font-size-3: 1.777rem;
+    --font-size-4: 2.369rem;
+    --font-size-5: 3.157rem;
+    --font-size-6: 4.209rem;
+    /* scale for 1.33 */
+    --line-height-1: 1.333rem;
+    --line-height-2: 1.777rem;
+    --line-height-3: 2.369rem;
+    --line-height-4: 3.157rem;
+    --line-height-5: 4.209rem;
+    --line-height-6: 5.598rem;
+  }
+}
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -5,9 +83,22 @@ html {
 }
 body {
   margin: 0;
+  font-size: 16px;
+  background: var(--lightshade);
+  flex-direction: column;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @include tablet-to-desktop() {
+    font-size: 20px;
+  }
+  @include desktop-to-hd {
+    font-size: 16px;
+  }
+  @include min-hd {
+    font-size: 20px;
+  }
 }
+
 article,
 aside,
 details,
@@ -22,6 +113,35 @@ section,
 summary {
   display: block;
 }
+
+main {
+  max-width: 300px;
+  min-height: calc(100vh - 200px);
+  margin: 1.45rem auto;
+  @include phone-landscape-to-tablet() {
+    max-width: 500px;
+  }
+
+  @include tablet-to-desktop() {
+    max-width: 700px;
+  }
+  @include desktop-to-hd() {
+    max-width: 1200px;
+    padding: 0 calc(5vw);
+  }
+  @include min-hd() {
+    max-width: 3000px;
+    padding: 0 calc(10vw);
+  }
+}
+
+footer {
+  background: var(--darkshade);
+  color: var(--lightshade);
+  padding: 2rem 1rem;
+  bottom: 0;
+}
+
 audio,
 canvas,
 progress,
@@ -61,7 +181,7 @@ dfn {
   font-style: italic;
 }
 h1 {
-  font-size: 2em;
+  font-size: var(--font-size-6);
   margin: 0.67em 0;
 }
 mark {
@@ -95,7 +215,7 @@ kbd,
 pre,
 samp {
   font-family: monospace, monospace;
-  font-size: 1em;
+  font-size: var(--font-size-1);
 }
 figure {
   margin: 1em 40px;
@@ -124,22 +244,22 @@ button,
 select {
   text-transform: none;
 }
-[type="reset"],
-[type="submit"],
+[type='reset'],
+[type='submit'],
 button,
-html [type="button"] {
+html [type='button'] {
   -webkit-appearance: button;
 }
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner,
 button::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring,
 button:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
@@ -159,21 +279,21 @@ legend {
 textarea {
   overflow: auto;
 }
-[type="checkbox"],
-[type="radio"] {
+[type='checkbox'],
+[type='radio'] {
   box-sizing: border-box;
   padding: 0;
 }
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
   height: auto;
 }
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
-[type="search"]::-webkit-search-cancel-button,
-[type="search"]::-webkit-search-decoration {
+[type='search']::-webkit-search-cancel-button,
+[type='search']::-webkit-search-decoration {
   -webkit-appearance: none;
 }
 ::-webkit-input-placeholder {
@@ -185,7 +305,6 @@ textarea {
   font: inherit;
 }
 html {
-  font: 112.5%/1.45em georgia, serif;
   box-sizing: border-box;
   overflow-y: scroll;
 }
@@ -199,15 +318,15 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
-  font-family: georgia, serif;
+  color: var(--darkshade);
+  font-family: var(--font-family);
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
-  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
-  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
-  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
-  font-feature-settings: "kern", "liga", "clig", "calt";
+  -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+  font-feature-settings: 'kern', 'liga', 'clig', 'calt';
 }
 img {
   max-width: 100%;
@@ -230,11 +349,10 @@ h1 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 2.25rem;
+  font-size: var(--font-size-6);
   line-height: 1.1;
 }
 h2 {
@@ -247,11 +365,10 @@ h2 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.62671rem;
+  font-size: var(--font-size-5);
   line-height: 1.1;
 }
 h3 {
@@ -264,11 +381,10 @@ h3 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1.38316rem;
+  font-size: var(--font-size-4);
   line-height: 1.1;
 }
 h4 {
@@ -281,11 +397,10 @@ h4 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 1rem;
+  font-size: var(--font-size-3);
   line-height: 1.1;
 }
 h5 {
@@ -298,11 +413,10 @@ h5 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 0.85028rem;
+  font-size: var(--font-size-2);
   line-height: 1.1;
 }
 h6 {
@@ -315,11 +429,10 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-family);
   font-weight: bold;
   text-rendering: optimizeLegibility;
-  font-size: 0.78405rem;
+  font-size: var(--font-size-1);
   line-height: 1.1;
 }
 hgroup {
@@ -571,10 +684,10 @@ td,
 th {
   text-align: left;
   border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-  font-feature-settings: "tnum";
-  -moz-font-feature-settings: "tnum";
-  -ms-font-feature-settings: "tnum";
-  -webkit-font-feature-settings: "tnum";
+  font-feature-settings: 'tnum';
+  -moz-font-feature-settings: 'tnum';
+  -ms-font-feature-settings: 'tnum';
+  -webkit-font-feature-settings: 'tnum';
   padding-left: 0.96667rem;
   padding-right: 0.96667rem;
   padding-top: 0.725rem;
@@ -592,8 +705,8 @@ tt,
 code {
   background-color: hsla(0, 0%, 0%, 0.04);
   border-radius: 3px;
-  font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
-    "Liberation Mono", Menlo, Courier, monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono', 'Liberation Mono',
+    Menlo, Courier, monospace;
   padding: 0;
   padding-top: 0.2em;
   padding-bottom: 0.2em;
@@ -607,13 +720,13 @@ code:after,
 tt:before,
 tt:after {
   letter-spacing: -0.2em;
-  content: " ";
+  content: ' ';
 }
 pre code:before,
 pre code:after,
 pre tt:before,
 pre tt:after {
-  content: "";
+  content: '';
 }
 @media only screen and (max-width: 480px) {
   html {

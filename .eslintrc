@@ -1,0 +1,22 @@
+{
+  "extends": ["airbnb", "eslint-config-prettier"],
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "parser": "babel-eslint",
+  "plugins": ["eslint-plugin-cypress"],
+  "env": { "cypress/globals": true },
+  "rules": {
+    "react/jsx-filename-extension": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelComponents": ["Label"],
+        "labelAttributes": ["label"],
+        "controlComponents": ["Input"],
+        "depth": 3
+      }
+    ]
+  }
+}
