@@ -5,7 +5,6 @@ import { Link } from 'gatsby';
 
 import User from './User';
 import Signout from './Signout';
-import formatMoney from '../utils/formatMoney';
 import './header.scss';
 
 class Header extends Component {
@@ -46,7 +45,6 @@ class Header extends Component {
               </h1>
               {me && (
                 <div className="profile">
-                  <p>{formatMoney(me.balance)}</p>
                   <img
                     src={`https://api.adorable.io/avatars/100/${encodeURI(me.id)}@adorable.png`}
                     alt="Avatar"
@@ -74,13 +72,10 @@ class Header extends Component {
                     {me && (
                       <>
                         <li>
-                          <Link to="/emails">Settings</Link>
+                          <Link to="/history">Gift History</Link>
                         </li>
                         <li>
-                          <Link to="/history">History</Link>
-                        </li>
-                        <li>
-                          <Link to="/add-funds">Add Funds</Link>
+                          <Link to="/add-funds">Give Gift</Link>
                         </li>
                       </>
                     )}
