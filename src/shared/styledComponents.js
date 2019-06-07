@@ -76,9 +76,10 @@ export const RadioInput = styled.input`
   }
 `;
 
-export const SubmitButton = styled.input`
+export const RadioInput = styled.input`
+  grid-area: radio;
+  margin: 0.33rem 0;
   width: 100%;
-  padding: 1rem;
   border-radius: 0.7rem;
   border: none;
   box-shadow: var(--deepboxshadow);
@@ -92,9 +93,19 @@ export const SubmitButton = styled.input`
 
   &:focus {
     outline: none;
-    background: var(--primary-darker);
+    background: var(--lightshade-lighter);
+    box-shadow: var(--deepboxshadow);
+  }
+
+  &:invalid {
+    border: 1px solid var(--danger);
+  }
+
+  &:valid {
+    border: 1px solid var(--success);
   }
 `;
+
 export const LinkButton = styled(Link)`
   width: 100%;
   padding: 1rem;
