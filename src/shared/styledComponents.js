@@ -22,6 +22,12 @@ export const Label = styled.label`
   width: 100%;
 `;
 
+export const RadioLabel = styled.label`
+  display: grid;
+  grid-template-areas: 'radio label';
+  grid-template-columns: 25px 1fr;
+`;
+
 export const Input = styled.input`
   padding: 0.667rem;
   width: 100%;
