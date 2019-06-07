@@ -3,42 +3,43 @@
 :root {
   /* Use this color as the background for your dark-on-light designs, or the 
   text color of an inverted design. */
-  --lightshade: #d9d7c5;
-  --lightshade-darker: #bfbeae;
-  --lightshade-lighter: #e6e3d1;
+  --lightshade: #f2f4f0;
+  --lightshade-darker: #d9dbd7;
+  --lightshade-lighter: #ffffff;
   /* Accent colors can be used to bring attention to design elements by 
   contrasting with the rest of the palette. */
-  --lightaccent: #323c59;
-  --lightaccent-darker: #394466;
-  --lightaccent-lighter: #242b40;
+  --lightaccent: #8c9a5f;
+  --lightaccent-darker: #515937;
+  --lightaccent-lighter: #d1e68e;
   /* This color should be eye-catching but not harsh. Can be liberally applied 
   to your layout as the main identity. */
-  --primary: #bf7b3f;
-  --primary-darker: #a66b37;
-  --primary-lighter: #cc8343;
+  --primary: #5ebfb5;
+  --primary-darker: #1f403c;
+  --primary-lighter: #64ccc2;
   /* Another accent color to consider. Not all colors have to be used sometimes 
   a simple color scheme works best. */
-  --darkaccent: #bf3b3b;
-  --darkaccent-darker: #a63333;
-  --darkaccent-lighter: #cc3f3f;
+  --darkaccent: #8c5675;
+  --darkaccent-darker: #4d2f40;
+  --darkaccent-lighter: #d984b4;
   /* Use as the text color for dark-on-light designs, or as the background for 
   inverted designs. */
-  --darkshade: #0d0d0d;
-  --darkshade-darker: #000000;
-  --darkshade-lighter: #333333;
+  --darkshade: #3f707d;
+  --darkshade-darker: #1f373d;
+  --darkshade-lighter: #65b4c9;
   /* Other UI Styles and colors */
   --grey: #cdcdc0;
-  --success: #7aa802;
-  --warning: #f77604;
-  --danger: #c60000;
+  --success: #88b04b;
+  --warning: #ff6c2f;
+  --danger: #ba0020;
   --deepboxshadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12),
     0 8px 10px -5px rgba(0, 0, 0, 0.2);
   --shallowboxshadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
     0 1px 5px 0 rgba(0, 0, 0, 0.12);
   --maxwidth: 1000px;
-  --fontfamily: Frutiger, 'Frutiger Linotype', Univers, Calibri, 'Gill Sans', 'Gill Sans MT',
-    'Myriad Pro', Myriad, 'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma,
-    Geneva, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-family: 'Open Sans', Univers, Calibri, 'Gill Sans', 'Gill Sans MT', 'Myriad Pro', Myriad,
+    'DejaVu Sans Condensed', 'Liberation Sans', 'Nimbus Sans L', Tahoma, Geneva, 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  --headline-font-family: 'Dancing Script', 'Zapf Chancery', Coronetscript, Florence, cursive;
   --borderradius: 5px;
 
   /* scale for 1.2 */
@@ -339,86 +340,11 @@ img {
   padding-top: 0;
   margin-bottom: 1.45rem;
 }
-h1 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  font-size: var(--font-size-6);
-  line-height: 1.1;
-}
-h2 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  font-size: var(--font-size-5);
-  line-height: 1.1;
-}
-h3 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  font-size: var(--font-size-4);
-  line-height: 1.1;
-}
-h4 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  font-size: var(--font-size-3);
-  line-height: 1.1;
-}
-h5 {
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 0;
-  padding-bottom: 0;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 0;
-  margin-bottom: 1.45rem;
-  color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
-  text-rendering: optimizeLegibility;
-  font-size: var(--font-size-2);
-  line-height: 1.1;
-}
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
   margin-left: 0;
   margin-right: 0;
@@ -429,11 +355,28 @@ h6 {
   padding-top: 0;
   margin-bottom: 1.45rem;
   color: inherit;
-  font-family: var(--font-family);
-  font-weight: bold;
+  font-weight: 400;
   text-rendering: optimizeLegibility;
-  font-size: var(--font-size-1);
   line-height: 1.1;
+  font-family: var(--headline-font-family);
+}
+h1 {
+  font-size: var(--font-size-6);
+}
+h2 {
+  font-size: var(--font-size-5);
+}
+h3 {
+  font-size: var(--font-size-4);
+}
+h4 {
+  font-size: var(--font-size-3);
+}
+h5 {
+  font-size: var(--font-size-2);
+}
+h6 {
+  font-size: var(--font-size-1);
 }
 hgroup {
   margin-left: 0;
@@ -727,6 +670,26 @@ pre code:after,
 pre tt:before,
 pre tt:after {
   content: '';
+}
+
+button {
+  padding: 1rem;
+  border-radius: 0.7rem;
+  border: none;
+  box-shadow: var(--deepboxshadow);
+  background: var(--primary);
+  text-transform: uppercase;
+  color: var(--lightshade);
+
+  &:active {
+    box-shadow: var(--shallowboxshadow);
+    background: var(--lightaccent-darker);
+  }
+
+  &:focus {
+    outline: none;
+    background: var(--lightaccent-darker);
+  }
 }
 @media only screen and (max-width: 480px) {
   html {
