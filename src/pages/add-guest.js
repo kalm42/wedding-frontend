@@ -1,37 +1,33 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { navigate } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import ErrorMessage from '../components/ErrorMessage';
+import Info from '../components/Info';
 import { Fieldset, Label, Input, SubmitButton } from '../shared/styledComponents';
 
-const SIGNUP_MUTATION = gql`
-  mutation SIGNUP_MUTATION(
+const INVITE_GUEST_MUTATION = gql`
+  mutation INVITE_GUEST_MUTATION(
     $name: String!
     $email: String!
-    $password: String!
     $line1: String!
     $line2: String
     $city: String!
     $state: String!
     $zip: String!
   ) {
-    signup(
+    inviteGuest(
       name: $name
       email: $email
-      password: $password
       line1: $line1
       line2: $line2
       city: $city
       state: $state
       zip: $zip
     ) {
-      id
-      email
-      name
+      message
     }
   }
 `;
@@ -46,6 +42,7 @@ class signupPage extends Component {
     city: '',
     state: '',
     zip: '',
+    message: '',
   };
 
   save = e => {
@@ -53,23 +50,41 @@ class signupPage extends Component {
     this.setState({ [name]: value });
   };
 
+  reset = () =>
+    this.setState({
+      name: '',
+      email: '',
+      guestCount: '0',
+      line1: '',
+      line2: '',
+      city: '',
+      state: '',
+      zip: '',
+    });
+
   render() {
-    const { name, email, guestCount, line1, line2, city, state, zip } = this.state;
+    const { name, email, guestCount, line1, line2, city, state, zip, message } = this.state;
     return (
-      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
-        {(signup, { error, loading }) => {
+      <Mutation mutation={INVITE_GUEST_MUTATION} variables={this.state}>
+        {(inviteGuest, { error, loading }) => {
           return (
             <Layout>
               <SEO title="Add Guest!" />
               <h1>Be Our Guest</h1>
               <p>Add one guest per household. Put all invitees in here.</p>
               <ErrorMessage error={error} />
+              {!!message.length && <Info text={message} />}
               <form
                 method="post"
                 onSubmit={async e => {
                   e.preventDefault();
-                  await signup();
-                  navigate('/');
+                  await inviteGuest();
+                  // eslint-disable-next-line
+                  this.setState(state => ({
+                    message: `Success! ${state.name} was added to the guest list.`,
+                  }));
+                  this.reset();
+                  window.scroll({ top: 0, behavior: 'smooth' });
                 }}
               >
                 <Fieldset disabled={loading} aria-busy={loading}>
@@ -154,7 +169,7 @@ class signupPage extends Component {
                       onChange={this.save}
                     />
                   </Label>
-                  <SubmitButton type="submit" value="Add Guest" />
+                  <SubmitButton type="submit" value="Invite Guest" />
                 </Fieldset>
               </form>
             </Layout>
