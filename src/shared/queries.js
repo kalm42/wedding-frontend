@@ -11,13 +11,3 @@ export const CURRENT_USER_QUERY = gql`
     }
   }
 `;
-
-export const ALL_EMAILS_QUERY = gql`
-  query ALL_EMAILS_QUERY {
-    emails {
-      id
-      email
-      isActive
-    }
-  }
-`;
