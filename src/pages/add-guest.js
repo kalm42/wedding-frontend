@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import { Link, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import ErrorMessage from '../components/ErrorMessage';
 import { Fieldset, Label, Input, SubmitButton } from '../shared/styledComponents';
-import { CURRENT_USER_QUERY } from '../shared/queries';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION(
@@ -41,8 +40,7 @@ class signupPage extends Component {
   state = {
     name: '',
     email: '',
-    password: '',
-    passwordConfirm: '',
+    guestCount: '0',
     line1: '',
     line2: '',
     city: '',
@@ -56,20 +54,15 @@ class signupPage extends Component {
   };
 
   render() {
-    const { name, email, password, passwordConfirm, line1, line2, city, state, zip } = this.state;
+    const { name, email, guestCount, line1, line2, city, state, zip } = this.state;
     return (
-      <Mutation
-        mutation={SIGNUP_MUTATION}
-        variables={this.state}
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      >
+      <Mutation mutation={SIGNUP_MUTATION} variables={this.state}>
         {(signup, { error, loading }) => {
           return (
             <Layout>
-              <SEO title="Sign up!" />
-              <Link to="/">Go back to the homepage</Link>
-              <h1>Sign up!</h1>
-              <p>Sign up for our amazing service!</p>
+              <SEO title="Add Guest!" />
+              <h1>Be Our Guest</h1>
+              <p>Add one guest per household. Put all invitees in here.</p>
               <ErrorMessage error={error} />
               <form
                 method="post"
@@ -80,6 +73,17 @@ class signupPage extends Component {
                 }}
               >
                 <Fieldset disabled={loading} aria-busy={loading}>
+                  <Label htmlFor="name">
+                    Addressed to
+                    <Input
+                      type="text"
+                      name="name"
+                      id="name"
+                      required
+                      value={name}
+                      onChange={this.save}
+                    />
+                  </Label>
                   <Label htmlFor="email">
                     Email
                     <Input
@@ -91,36 +95,14 @@ class signupPage extends Component {
                       onChange={this.save}
                     />
                   </Label>
-                  <Label htmlFor="password">
-                    Password
+                  <Label htmlFor="guestCount">
+                    Estimated number of attendees
                     <Input
-                      type="password"
-                      name="password"
-                      id="password"
+                      type="number"
+                      name="guestCount"
+                      id="guestCount"
                       required
-                      value={password}
-                      onChange={this.save}
-                    />
-                  </Label>
-                  <Label htmlFor="passwordConfirm">
-                    Confirm Password
-                    <Input
-                      type="password"
-                      id="passwordConfirm"
-                      name="passwordConfirm"
-                      required
-                      value={passwordConfirm}
-                      onChange={this.save}
-                    />
-                  </Label>
-                  <Label htmlFor="name">
-                    Name
-                    <Input
-                      type="text"
-                      name="name"
-                      id="name"
-                      required
-                      value={name}
+                      value={guestCount}
                       onChange={this.save}
                     />
                   </Label>
@@ -172,7 +154,7 @@ class signupPage extends Component {
                       onChange={this.save}
                     />
                   </Label>
-                  <SubmitButton type="submit" value="Sign Up" />
+                  <SubmitButton type="submit" value="Add Guest" />
                 </Fieldset>
               </form>
             </Layout>
