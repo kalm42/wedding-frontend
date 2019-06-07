@@ -9,6 +9,7 @@ const InfoBlock = styled.div`
   border-radius: 0.7rem;
   color: var(--lightaccent-darker);
   border: 1px solid var(--lightaccent);
+  margin: 0.7rem 0;
 `;
 
 const Info = ({ text }) => <InfoBlock>{text}</InfoBlock>;

@@ -62,9 +62,14 @@ class Header extends Component {
                         <Signout />
                       </li>
                     ) : (
-                      <li>
-                        <Link to="/signin">Login</Link>
-                      </li>
+                      <>
+                        <li>
+                          <Link to="/rsvp">RSVP</Link>
+                        </li>
+                        <li>
+                          <Link to="/signin">Login</Link>
+                        </li>
+                      </>
                     )}
                     <li>
                       <Link to="/">Pricing</Link>

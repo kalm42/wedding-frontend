@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'gatsby';
 
 export const Fieldset = styled.fieldset`
   display: grid;
@@ -75,14 +76,48 @@ export const RadioInput = styled.input`
   }
 `;
 
-export const SubmitButton = styled.input`
+export const RadioInput = styled.input`
+  grid-area: radio;
+  margin: 0.33rem 0;
   width: 100%;
-  padding: 1rem;
   border-radius: 0.7rem;
   border: none;
   box-shadow: var(--deepboxshadow);
   background: var(--primary);
   text-transform: uppercase;
+
+  &:active {
+    box-shadow: var(--shallowboxshadow);
+    background: var(--primary-darker);
+  }
+
+  &:focus {
+    outline: none;
+    background: var(--lightshade-lighter);
+    box-shadow: var(--deepboxshadow);
+  }
+
+  &:invalid {
+    border: 1px solid var(--danger);
+  }
+
+  &:valid {
+    border: 1px solid var(--success);
+  }
+`;
+
+export const LinkButton = styled(Link)`
+  width: 100%;
+  padding: 1rem;
+  margin: 2rem 0;
+  border-radius: 0.7rem;
+  border: none;
+  box-shadow: var(--deepboxshadow);
+  background: var(--primary);
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  text-decoration: none;
 
   &:active {
     box-shadow: var(--shallowboxshadow);
