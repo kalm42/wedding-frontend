@@ -2,6 +2,7 @@ import React from 'react';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
+import { LinkButton } from '../shared/styledComponents';
 
 const IndexPage = () => (
   <Layout>
@@ -28,6 +29,7 @@ const IndexPage = () => (
       </p>
 
       <p>RSVP by March 20th.</p>
+      <LinkButton to="/rsvp">RSVP</LinkButton>
     </div>
 
     <div>
