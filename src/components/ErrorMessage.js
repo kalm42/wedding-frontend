@@ -3,14 +3,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Sentry from '@sentry/browser';
 
+import { Danger } from '../shared/styledComponents';
+
 const ErrorMessage = ({ error }) => {
   if (!error || !error.message) return null;
   if (error.networkError && error.networkError.result && error.networkError.result.errors.length) {
     return error.networkError.result.errors.map((e, i) => (
-      <div key={i}>
+      <Danger key={i}>
         <p data-test="graphql-error">
-          <strong>Dagnabit!</strong>
-          {e.message.replace('GraphQL error: ', '')}
+          <strong>Dagnabit! </strong>
+          {e.message.replace(' GraphQL error: ', '')}
         </p>
         <button
           onClick={() => Sentry.showReportDialog()}
@@ -25,14 +27,14 @@ const ErrorMessage = ({ error }) => {
         >
           Report feedback
         </button>
-      </div>
+      </Danger>
     ));
   }
   return (
-    <div>
+    <Danger>
       <p data-test="graphql-error">
         <strong>Bummer...</strong>
-        {error.message.replace('GraphQL error: ', '')}
+        {error.message.replace(' GraphQL error: ', '')}
       </p>
       <button
         onClick={() => Sentry.showReportDialog()}
@@ -47,7 +49,7 @@ const ErrorMessage = ({ error }) => {
       >
         Report feedback
       </button>
-    </div>
+    </Danger>
   );
 };
 

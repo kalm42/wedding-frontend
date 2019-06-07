@@ -34,6 +34,29 @@ export const Input = styled.input`
   &:focus {
     outline: none;
     background: var(--lightshade-lighter);
+  }
+
+  &:invalid {
+    border: 1px solid var(--danger);
+  }
+
+  &:valid {
+    border: 1px solid var(--success);
+  }
+`;
+
+export const RadioInput = styled.input`
+  grid-area: radio;
+  margin: 0.33rem 0;
+  width: 100%;
+  border-radius: 0.7rem;
+  border: none;
+  background: var(--lightshade-darker);
+  color: var(--lightaccent);
+
+  &:focus {
+    outline: none;
+    background: var(--lightshade-lighter);
     box-shadow: var(--deepboxshadow);
   }
 
@@ -52,7 +75,7 @@ export const SubmitButton = styled.input`
   border-radius: 0.7rem;
   border: none;
   box-shadow: var(--deepboxshadow);
-  background: linear-gradient(245deg, var(--primary-lighter), var(--primary-darker));
+  background: var(--primary);
   text-transform: uppercase;
 
   &:active {
@@ -66,23 +89,16 @@ export const SubmitButton = styled.input`
   }
 `;
 
+export const Danger = styled.div`
+  padding: 2rem;
+  background: var(--danger);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+`;
+
 export const Button = styled.button`
   width: 100%;
-  padding: 1rem;
-  border-radius: 0.7rem;
-  border: none;
-  box-shadow: var(--deepboxshadow);
   background: linear-gradient(245deg, var(--lightaccent-lighter), var(--lightaccent-darker));
-  text-transform: uppercase;
-  color: var(--lightshade);
-
-  &:active {
-    box-shadow: var(--shallowboxshadow);
-    background: var(--lightaccent-darker);
-  }
-
-  &:focus {
-    outline: none;
-    background: var(--lightaccent-darker);
-  }
 `;
