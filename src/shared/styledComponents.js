@@ -52,27 +52,23 @@ export const Input = styled.input`
   }
 `;
 
-export const RadioInput = styled.input`
-  grid-area: radio;
-  margin: 0.33rem 0;
+export const SubmitButton = styled.input`
   width: 100%;
+  padding: 1rem;
   border-radius: 0.7rem;
   border: none;
-  background: var(--lightshade-darker);
-  color: var(--lightaccent);
+  box-shadow: var(--deepboxshadow);
+  background: linear-gradient(245deg, var(--primary-lighter), var(--primary-darker));
+  text-transform: uppercase;
+
+  &:active {
+    box-shadow: var(--shallowboxshadow);
+    background: var(--primary-darker);
+  }
 
   &:focus {
     outline: none;
-    background: var(--lightshade-lighter);
-    box-shadow: var(--deepboxshadow);
-  }
-
-  &:invalid {
-    border: 1px solid var(--danger);
-  }
-
-  &:valid {
-    border: 1px solid var(--success);
+    background: var(--primary-darker);
   }
 `;
 
