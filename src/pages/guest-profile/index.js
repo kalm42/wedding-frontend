@@ -1,27 +1,27 @@
 import React from 'react';
 import { Router, Location } from '@reach/router';
 
+import UpdateGuest from './update-guest';
+import ListGuests from './list-guests';
+
 const index = () => {
   return (
     <Location>
       {({ location }) => (
         <Router location={location}>
+          <ListGuests path="guest-profile/" />
           <Foo path="guest-profile/:guestId" />
+          <UpdateGuest path="guest-profile/edit/:guestId" />
         </Router>
       )}
     </Location>
   );
 };
 
-const Foo = props => (
+const Foo = () => (
   <div>
-    <p>Guest {props.guestId}</p>
+    <p>Guest</p>
   </div>
 );
 
 export default index;
-
-/**
- * https://www.gatsbyjs.org/docs/reach-router-and-gatsby/
- * Update this page with some content and an example repo.
- */
