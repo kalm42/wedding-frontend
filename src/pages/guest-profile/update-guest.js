@@ -3,11 +3,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Mutation, Query } from 'react-apollo';
+import { navigate } from 'gatsby';
 
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Error from '../../components/ErrorMessage';
-import { Fieldset, Label, Input, SubmitButton } from '../../shared/styledComponents';
+import {
+  Fieldset,
+  Label,
+  Input,
+  SubmitButton,
+  TwoColumns,
+  LinkButton,
+} from '../../shared/styledComponents';
 import { USER_QUERY } from '../../shared/queries';
 
 const UPDATE_USER_MUTATION = gql`
@@ -40,8 +48,10 @@ class UpdateGuest extends Component {
   };
 
   updateGuest = async (e, updateUser) => {
+    const { guestId } = this.props;
     e.preventDefault();
     await updateUser();
+    navigate(`/guest-profile/${guestId}`);
   };
 
   render() {
@@ -93,7 +103,19 @@ class UpdateGuest extends Component {
                             onChange={this.save}
                           />
                         </Label>
-                        <SubmitButton type="submit" value="Update Guest" />
+                        <TwoColumns>
+                          <LinkButton
+                            style={{ background: 'var(--danger)', color: 'var(--lightshade)' }}
+                            to="/guest-profile"
+                          >
+                            Cancel
+                          </LinkButton>
+                          <SubmitButton
+                            style={{ margin: '2rem 0' }}
+                            type="submit"
+                            value="Update Guest"
+                          />
+                        </TwoColumns>
                       </Fieldset>
                     </form>
                   );
