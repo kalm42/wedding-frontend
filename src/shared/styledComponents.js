@@ -139,3 +139,24 @@ export const Button = styled.button`
   width: 100%;
   background: linear-gradient(245deg, var(--lightaccent-lighter), var(--lightaccent-darker));
 `;
+
+export const RemoveButton = styled.button`
+  padding: 0 1rem;
+  background: var(--danger);
+  margin: 0 1rem;
+`;
+export const CancelLink = styled(Link)`
+  padding: 0 1rem;
+  background: var(--danger);
+  margin: 0 1rem;
+`;
+
+export const TwoColumns = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
