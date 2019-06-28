@@ -7,6 +7,7 @@ import { Link } from 'gatsby';
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import ErrorMessage from '../../components/ErrorMessage';
+import { LinkButton, RemoveButton, TwoColumns } from '../../shared/styledComponents';
 
 const GUESTS_QUERY = gql`
   query GUESTS_QUERY {
@@ -15,11 +16,6 @@ const GUESTS_QUERY = gql`
       name
     }
   }
-`;
-
-const RemoveButton = styled.button`
-  padding: 0 1rem;
-  background: var(--darkaccent);
 `;
 
 const EditButton = styled(Link)`
@@ -34,8 +30,11 @@ const EditButton = styled(Link)`
 const ListGuests = () => (
   <Layout>
     <SEO title="Guest Management" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Guests</h1>
-    <p>Add and remove guests here.</p>
+    <h1>All Guests</h1>
+    <TwoColumns>
+      <LinkButton to="/add-guest">Invite another guest</LinkButton>
+      <button type="button">Send invites</button>
+    </TwoColumns>
     <Query query={GUESTS_QUERY}>
       {({ data, loading, error }) => {
         if (loading) return <p>Loading...</p>;
@@ -43,16 +42,22 @@ const ListGuests = () => (
         const guests = data.users;
         return (
           <table>
+            <thead>
+              <tr>
+                <th>Primary Guest</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
             <tbody>
               {guests.map(guest => (
-                <tr>
+                <tr key={guest.id}>
                   <td>
-                    {/* Mutation to remove guest */}
-                    <RemoveButton type="button">-</RemoveButton>
+                    <Link to={`/guest-profile/${guest.id}`}>{guest.name}</Link>
                   </td>
-                  <td>{guest.name}</td>
                   <td>
-                    <EditButton to="edit-guest">edit</EditButton>
+                    <EditButton to={`/guest-profile/edit/${guest.id}`}>edit</EditButton>
+                    {/* Mutation to remove guest */}
+                    <RemoveButton type="button">X</RemoveButton>
                   </td>
                 </tr>
               ))}
