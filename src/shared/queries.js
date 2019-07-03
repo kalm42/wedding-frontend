@@ -29,3 +29,12 @@ export const USER_QUERY = gql`
     }
   }
 `;
+
+export const GUESTS_QUERY = gql`
+  query GUESTS_QUERY {
+    users {
+      id
+      name
+    }
+  }
+`;

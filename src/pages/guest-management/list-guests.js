@@ -1,5 +1,4 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import styled from 'styled-components';
 import { Link } from 'gatsby';
@@ -8,15 +7,7 @@ import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import ErrorMessage from '../../components/ErrorMessage';
 import { LinkButton, RemoveButton, TwoColumns } from '../../shared/styledComponents';
-
-const GUESTS_QUERY = gql`
-  query GUESTS_QUERY {
-    users {
-      id
-      name
-    }
-  }
-`;
+import { GUESTS_QUERY } from '../../shared/queries';
 
 const EditButton = styled(Link)`
   text-decoration: none;
@@ -32,7 +23,7 @@ const ListGuests = () => (
     <SEO title="Guest Management" keywords={[`gatsby`, `application`, `react`]} />
     <h1>All Guests</h1>
     <TwoColumns>
-      <LinkButton to="/add-guest">Invite another guest</LinkButton>
+      <LinkButton to="/guest-management/invite">Invite another guest</LinkButton>
       <button type="button">Send invites</button>
     </TwoColumns>
     <Query query={GUESTS_QUERY}>
