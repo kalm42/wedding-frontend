@@ -8,6 +8,7 @@ import { navigate } from 'gatsby';
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Error from '../../components/ErrorMessage';
+import { USER_QUERY } from '../../shared/queries';
 import {
   Fieldset,
   Label,
@@ -49,6 +50,7 @@ const UPDATE_ADDRESS_MUTATION = gql`
 class UpdateAddress extends Component {
   static propTypes = {
     addressId: PropTypes.string.isRequired,
+    guestId: PropTypes.string.isRequired,
   };
 
   save = e => {
@@ -57,14 +59,14 @@ class UpdateAddress extends Component {
   };
 
   updateAddress = async (e, updateAddress) => {
-    const { addressId } = this.props;
+    const { guestId } = this.props;
     e.preventDefault();
     await updateAddress();
-    navigate(`/guest-profile/${addressId}`);
+    navigate(`/guest-profile/${guestId}`);
   };
 
   render() {
-    const { addressId } = this.props;
+    const { addressId, guestId } = this.props;
     return (
       <Layout>
         <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
@@ -79,6 +81,7 @@ class UpdateAddress extends Component {
               <Mutation
                 mutation={UPDATE_ADDRESS_MUTATION}
                 variables={{ id: addressId, ...this.state }}
+                refetchQueries={[{ query: USER_QUERY, variables: { id: guestId } }]}
               >
                 {(updateAddress, { loading, error }) => {
                   if (loading) return <p>Loading...</p>;

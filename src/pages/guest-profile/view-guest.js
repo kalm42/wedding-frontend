@@ -16,7 +16,6 @@ const ViewGuest = ({ guestId }) => (
       {({ data, error, loading }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <Error error={error} />;
-        console.log(data);
         return (
           <TwoColumns>
             <div>
@@ -44,7 +43,7 @@ const ViewGuest = ({ guestId }) => (
                   {data.user.address.zip}
                 </address>
               </a>
-              <LinkButton to={`/guest-profile/address/${data.user.address.id}`}>
+              <LinkButton to={`/guest-profile/address/${data.user.id}/${data.user.address.id}`}>
                 Update Address
               </LinkButton>
             </div>
