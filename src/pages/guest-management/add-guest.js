@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
-import ErrorMessage from '../components/ErrorMessage';
-import Info from '../components/Info';
-import { Fieldset, Label, Input, SubmitButton } from '../shared/styledComponents';
+import Layout from '../../components/layout';
+import SEO from '../../components/seo';
+import ErrorMessage from '../../components/ErrorMessage';
+import Info from '../../components/Info';
+import { Fieldset, Label, Input, SubmitButton } from '../../shared/styledComponents';
+import { GUESTS_QUERY } from '../../shared/queries';
 
 const INVITE_GUEST_MUTATION = gql`
   mutation INVITE_GUEST_MUTATION(
@@ -32,7 +33,7 @@ const INVITE_GUEST_MUTATION = gql`
   }
 `;
 
-class signupPage extends Component {
+class AddGuest extends Component {
   state = {
     name: '',
     email: '',
@@ -65,7 +66,11 @@ class signupPage extends Component {
   render() {
     const { name, email, guestCount, line1, line2, city, state, zip, message } = this.state;
     return (
-      <Mutation mutation={INVITE_GUEST_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={INVITE_GUEST_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: GUESTS_QUERY }]}
+      >
         {(inviteGuest, { error, loading }) => {
           return (
             <Layout>
@@ -180,4 +185,4 @@ class signupPage extends Component {
   }
 }
 
-export default signupPage;
+export default AddGuest;
