@@ -74,6 +74,10 @@ class Header extends Component {
                     <li>
                       <Link to="/">Pricing</Link>
                     </li>
+                    {/* TODO: must be logged in, must be admin */}
+                    <li>
+                      <Link to="/guest-management">All Guests</Link>
+                    </li>
                     {me && (
                       <>
                         <li>

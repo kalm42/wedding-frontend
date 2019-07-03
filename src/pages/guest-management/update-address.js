@@ -62,7 +62,7 @@ class UpdateAddress extends Component {
     const { guestId } = this.props;
     e.preventDefault();
     await updateAddress();
-    navigate(`/guest-profile/${guestId}`);
+    navigate(`/guest-management/${guestId}`);
   };
 
   render() {
@@ -146,7 +146,7 @@ class UpdateAddress extends Component {
                         <TwoColumns>
                           <LinkButton
                             style={{ background: 'var(--danger)', color: 'var(--lightshade)' }}
-                            to="/guest-profile"
+                            to="/guest-management"
                           >
                             {loading ? 'Too late' : 'Cancel'}
                           </LinkButton>

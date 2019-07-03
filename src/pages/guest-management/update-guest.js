@@ -51,7 +51,7 @@ class UpdateGuest extends Component {
     const { guestId } = this.props;
     e.preventDefault();
     await updateUser();
-    navigate(`/guest-profile/${guestId}`);
+    navigate(`/guest-management/${guestId}`);
   };
 
   render() {
@@ -110,7 +110,7 @@ class UpdateGuest extends Component {
                         <TwoColumns>
                           <LinkButton
                             style={{ background: 'var(--danger)', color: 'var(--lightshade)' }}
-                            to="/guest-profile"
+                            to="/guest-management"
                           >
                             Cancel
                           </LinkButton>

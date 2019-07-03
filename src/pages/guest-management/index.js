@@ -11,10 +11,10 @@ const index = () => {
     <Location>
       {({ location }) => (
         <Router location={location}>
-          <UpdateGuest path="guest-profile/edit/:guestId" />
-          <UpdateAddress path="guest-profile/address/:guestId/:addressId" />
-          <ViewGuest path="guest-profile/:guestId" />
-          <ListGuests path="guest-profile/" />
+          <UpdateGuest path="guest-management/edit/:guestId" />
+          <UpdateAddress path="guest-management/address/:guestId/:addressId" />
+          <ViewGuest path="guest-management/:guestId" />
+          <ListGuests path="guest-management/" />
         </Router>
       )}
     </Location>

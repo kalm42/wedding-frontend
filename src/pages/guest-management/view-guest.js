@@ -22,7 +22,7 @@ const ViewGuest = ({ guestId }) => (
               <p>Name: {data.user.name}</p>
               <p>Email: {data.user.email}</p>
               <p>Total Guests: {data.user.guestCount}</p>
-              <LinkButton to={`/guest-profile/edit/${guestId}`}>Update Guest</LinkButton>
+              <LinkButton to={`/guest-management/edit/${guestId}`}>Update Guest</LinkButton>
             </div>
             <div>
               <p>Address:</p>
@@ -43,7 +43,7 @@ const ViewGuest = ({ guestId }) => (
                   {data.user.address.zip}
                 </address>
               </a>
-              <LinkButton to={`/guest-profile/address/${data.user.id}/${data.user.address.id}`}>
+              <LinkButton to={`/guest-management/address/${data.user.id}/${data.user.address.id}`}>
                 Update Address
               </LinkButton>
             </div>

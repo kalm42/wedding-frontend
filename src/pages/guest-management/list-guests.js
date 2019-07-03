@@ -52,10 +52,10 @@ const ListGuests = () => (
               {guests.map(guest => (
                 <tr key={guest.id}>
                   <td>
-                    <Link to={`/guest-profile/${guest.id}`}>{guest.name}</Link>
+                    <Link to={`/guest-management/${guest.id}`}>{guest.name}</Link>
                   </td>
                   <td>
-                    <EditButton to={`/guest-profile/edit/${guest.id}`}>edit</EditButton>
+                    <EditButton to={`/guest-management/edit/${guest.id}`}>edit</EditButton>
                     {/* Mutation to remove guest */}
                     <RemoveButton type="button">X</RemoveButton>
                   </td>
