@@ -6,8 +6,9 @@ import { Link } from 'gatsby';
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import ErrorMessage from '../../components/ErrorMessage';
-import { LinkButton, RemoveButton, TwoColumns } from '../../shared/styledComponents';
+import { LinkButton, TwoColumns } from '../../shared/styledComponents';
 import { GUESTS_QUERY } from '../../shared/queries';
+import DeleteGuest from '../../components/DeleteGuest';
 
 const EditButton = styled(Link)`
   text-decoration: none;
@@ -47,8 +48,7 @@ const ListGuests = () => (
                   </td>
                   <td>
                     <EditButton to={`/guest-management/edit/${guest.id}`}>edit</EditButton>
-                    {/* Mutation to remove guest */}
-                    <RemoveButton type="button">X</RemoveButton>
+                    <DeleteGuest guest={{ id: guest.id, name: guest.name }} />
                   </td>
                 </tr>
               ))}
