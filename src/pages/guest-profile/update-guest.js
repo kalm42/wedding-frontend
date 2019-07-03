@@ -66,7 +66,11 @@ class UpdateGuest extends Component {
             if (!data.user) return <Error error={{ message: `No guest with ID: ${guestId}.` }} />;
             if (error) return <Error error={error} />;
             return (
-              <Mutation mutation={UPDATE_USER_MUTATION} variables={{ id: guestId, ...this.state }}>
+              <Mutation
+                mutation={UPDATE_USER_MUTATION}
+                variables={{ id: guestId, ...this.state }}
+                refetchQueries={[{ query: USER_QUERY, variables: { id: guestId } }]}
+              >
                 {(updateUser, { loading, error }) => {
                   if (loading) return <p>Loading...</p>;
                   return (
