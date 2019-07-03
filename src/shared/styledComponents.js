@@ -134,6 +134,27 @@ export const Danger = styled.div`
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
 `;
+export const Warning = styled.div`
+  padding: 2rem;
+  background: var(--warning);
+  color: var(--lightshade);
+  font-weight: 900;
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+`;
+export const Success = styled.div`
+  padding: 2rem;
+  background: var(--success);
+  color: var(--darkaccent);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+`;
 
 export const Button = styled.button`
   width: 100%;
