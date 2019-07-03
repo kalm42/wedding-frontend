@@ -20,6 +20,7 @@ export const USER_QUERY = gql`
       email
       guestCount
       address {
+        id
         line1
         line2
         city
