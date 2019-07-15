@@ -6,9 +6,17 @@ import { navigate } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
-import PleaseSignIn from '../components/PleaseSignIn';
 import User from '../components/User';
 import { CURRENT_USER_QUERY } from '../shared/queries';
+import ErrorMessage from '../components/ErrorMessage';
+import {
+  Fieldset,
+  Label,
+  Input,
+  RadioLabel,
+  RadioInput,
+  SubmitButton,
+} from '../shared/styledComponents';
 
 const CREATE_TRANSACTION_MUTATION = gql`
   mutation CREATE_TRANSACTION_MUTATION($token: String!, $amount: Int!) {
@@ -22,7 +30,7 @@ const CREATE_TRANSACTION_MUTATION = gql`
 
 class AddFundsPage extends Component {
   state = {
-    amount: 2000,
+    amount: 8000,
   };
 
   updateAmount = e => {
@@ -50,34 +58,27 @@ class AddFundsPage extends Component {
     return (
       <Layout>
         <SEO title="Add Funds" keywords={[`gatsby`, `application`, `react`]} />
-        <h1>Add Funds</h1>
-        <p>Now go build something great.</p>
-        <PleaseSignIn>
-          <form onSubmit={e => e.preventDefault()}>
-            <label htmlFor="a10">
-              <input
-                type="radio"
-                id="a10"
-                name="amount"
-                value="1000"
-                checked={this.isSelected(1000)}
-                onChange={this.updateAmount}
-              />
-              $10
-            </label>
-            <label htmlFor="a20">
-              <input
-                type="radio"
-                id="a20"
-                name="amount"
-                value="2000"
-                checked={this.isSelected(2000)}
-                onChange={this.updateAmount}
-              />
-              $20
-            </label>
-            <label htmlFor="a40">
-              <input
+        <h1>Wedding Gift</h1>
+        <p>
+          We would prefer no boxed gifts, but that on its own is boring. So please vote what we
+          should do with the money.
+        </p>
+        <form onSubmit={e => e.preventDefault()}>
+          <h2>What should we do?</h2>
+          <Fieldset>
+            <RadioLabel htmlFor="op1">
+              <RadioInput type="radio" name="option" id="op1" value="Gym" required />
+              Gym
+            </RadioLabel>
+            <RadioLabel htmlFor="op2">
+              <RadioInput type="radio" name="option" id="op2" value="Italian Honeymoon" required />
+              Italian Honeymoon
+            </RadioLabel>
+          </Fieldset>
+          <p>Graph here of current standing.</p>
+          <Fieldset>
+            <RadioLabel htmlFor="a40">
+              <RadioInput
                 type="radio"
                 id="a40"
                 name="amount"
@@ -86,9 +87,9 @@ class AddFundsPage extends Component {
                 onChange={this.updateAmount}
               />
               $40
-            </label>
-            <label htmlFor="a80">
-              <input
+            </RadioLabel>
+            <RadioLabel htmlFor="a80">
+              <RadioInput
                 type="radio"
                 id="a80"
                 name="amount"
@@ -97,9 +98,9 @@ class AddFundsPage extends Component {
                 onChange={this.updateAmount}
               />
               $80
-            </label>
-            <label htmlFor="a160">
-              <input
+            </RadioLabel>
+            <RadioLabel htmlFor="a160">
+              <RadioInput
                 type="radio"
                 id="a160"
                 name="amount"
@@ -108,44 +109,50 @@ class AddFundsPage extends Component {
                 onChange={this.updateAmount}
               />
               $160
-            </label>
-            <label htmlFor="num">
+            </RadioLabel>
+            <Label htmlFor="num">
               Other
-              <input
+              <Input
                 type="number"
                 name="amount"
                 id="num"
                 value={amount / 100}
                 onChange={this.customAmount}
               />
-            </label>
-            <User>
-              {({ data: { me } }) => (
+            </Label>
+          </Fieldset>
+          <User>
+            {({ data }) => {
+              console.log({ data });
+              return (
                 <Mutation
                   mutation={CREATE_TRANSACTION_MUTATION}
                   refetchQueries={[{ query: CURRENT_USER_QUERY }]}
                 >
-                  {createFundTransaction => (
-                    <StripeCheckout
-                      amount={amount}
-                      name="Easy Postal Service"
-                      description={`Funding acount with $${amount / 100}.`}
-                      image={`https://api.adorable.io/avatars/100/${encodeURI(
-                        me.name,
-                      )}@adorable.png`}
-                      stripeKey={process.env.GATSBY_STRIPE_KEY}
-                      currency="USD"
-                      email={me.email}
-                      token={res => this.onToken(res, createFundTransaction)}
-                    >
-                      <input type="submit" value="Add funds" />
-                    </StripeCheckout>
+                  {(createFundTransaction, { loading, error }) => (
+                    <>
+                      <StripeCheckout
+                        amount={amount}
+                        name="Easy Postal Service"
+                        description={`Funding acount with $${amount / 100}.`}
+                        image={`https://api.adorable.io/avatars/100/${encodeURI(
+                          data.me ? data.me.id : '123',
+                        )}@adorable.png`}
+                        stripeKey={process.env.GATSBY_STRIPE_KEY}
+                        currency="USD"
+                        email={data.me ? data.me.email : null}
+                        token={res => this.onToken(res, createFundTransaction)}
+                      >
+                        <SubmitButton type="submit" value={loading ? 'Thank you' : 'Give'} />
+                      </StripeCheckout>
+                      <ErrorMessage error={error} />
+                    </>
                   )}
                 </Mutation>
-              )}
-            </User>
-          </form>
-        </PleaseSignIn>
+              );
+            }}
+          </User>
+        </form>
       </Layout>
     );
   }
