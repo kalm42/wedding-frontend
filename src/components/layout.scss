@@ -117,7 +117,7 @@ summary {
 
 main {
   max-width: 300px;
-  min-height: calc(100vh - 200px);
+  min-height: calc(100vh - 210px);
   margin: 1.45rem auto;
   @include phone-landscape-to-tablet() {
     max-width: 500px;
