@@ -17,10 +17,11 @@ import {
   RadioInput,
   SubmitButton,
 } from '../shared/styledComponents';
+import { STRIPE_KEY } from '../../config';
 
 const CREATE_TRANSACTION_MUTATION = gql`
-  mutation CREATE_TRANSACTION_MUTATION($token: String!, $amount: Int!) {
-    createFundTransaction(token: $token, amount: $amount) {
+  mutation CREATE_TRANSACTION_MUTATION($token: String!, $amount: Int!, $gift: String!) {
+    createFundTransaction(token: $token, amount: $amount, gift: $gift) {
       id
       type
       price
@@ -49,7 +50,7 @@ class AddFundsPage extends Component {
 
   onToken = async (res, createFundTransaction) => {
     const { amount } = this.state;
-    await createFundTransaction({ variables: { token: res.id, amount } });
+    await createFundTransaction({ variables: { token: res.id, amount, gift: 'GYM' } });
     navigate('/history');
   };
 
@@ -133,12 +134,12 @@ class AddFundsPage extends Component {
                     <>
                       <StripeCheckout
                         amount={amount}
-                        name="Easy Postal Service"
-                        description={`Funding acount with $${amount / 100}.`}
+                        name="Kyle &amp; Shelly's Wedding"
+                        description={`Giving $${amount / 100}.`}
                         image={`https://api.adorable.io/avatars/100/${encodeURI(
                           data.me ? data.me.id : '123',
                         )}@adorable.png`}
-                        stripeKey={process.env.GATSBY_STRIPE_KEY}
+                        stripeKey={STRIPE_KEY}
                         currency="USD"
                         email={data.me ? data.me.email : null}
                         token={res => this.onToken(res, createFundTransaction)}
