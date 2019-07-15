@@ -3,7 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import * as Sentry from '@sentry/browser';
 
+import { SENTRY_DSN } from '../../config';
 import { Danger } from '../shared/styledComponents';
+
+Sentry.init({ dsn: SENTRY_DSN });
 
 const ErrorMessage = ({ error }) => {
   if (!error || !error.message) return null;
