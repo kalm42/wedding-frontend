@@ -8,6 +8,8 @@ import Layout from '../components/layout';
 import SEO from '../components/seo';
 import User from '../components/User';
 import ErrorMessage from '../components/ErrorMessage';
+import GiftGraph from '../components/GiftGraph';
+import { GIFT_STATUS_QUERY } from '../shared/queries';
 import {
   Fieldset,
   Label,
@@ -81,7 +83,10 @@ class AddFundsPage extends Component {
           <h2>What should we do?</h2>
           <User>
             {({ data }) => (
-              <Mutation mutation={CREATE_TRANSACTION_MUTATION}>
+              <Mutation
+                mutation={CREATE_TRANSACTION_MUTATION}
+                refetchQueries={[{ query: GIFT_STATUS_QUERY }]}
+              >
                 {(createFundTransaction, { loading, error }) => (
                   <>
                     {!data.me && (
@@ -122,7 +127,7 @@ class AddFundsPage extends Component {
                         Italian Honeymoon
                       </RadioLabel>
                     </Fieldset>
-                    <p>Graph here of current standing.</p>
+                    <GiftGraph />
                     <Fieldset disabled={loading} aria-busy={loading}>
                       <RadioLabel htmlFor="a40">
                         <RadioInput
