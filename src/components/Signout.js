@@ -11,11 +11,15 @@ const Button = styled.button`
   cursor: pointer;
   display: block;
   padding: 0;
+  margin: 0;
   transition: all 0.5s;
   position: relative;
+  box-shadow: none;
+  text-transform: none;
+  color: var(--darkshade);
 
   &:hover {
-    color: var(--lightaccent);
+    color: var(--lightaccent-lighter);
   }
 
   &:after {
@@ -25,7 +29,7 @@ const Button = styled.button`
     height: 2px;
     left: 50%;
     position: absolute;
-    background: var(--lightaccent);
+    background: var(--lightaccent-lighter);
     transition: width 0.3s ease 0s, left 0.5s ease 0s;
     width: 0;
   }
@@ -33,6 +37,16 @@ const Button = styled.button`
   &:hover:after {
     width: 100%;
     left: 0;
+  }
+
+  &:active {
+    box-shadow: none;
+    background: none;
+  }
+
+  &:focus {
+    outline: none;
+    background: none;
   }
 `;
 
