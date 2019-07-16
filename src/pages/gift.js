@@ -31,6 +31,7 @@ const CREATE_TRANSACTION_MUTATION = gql`
 class AddFundsPage extends Component {
   state = {
     amount: 8000,
+    name: '',
   };
 
   updateAmount = e => {
@@ -56,14 +57,18 @@ class AddFundsPage extends Component {
     this.setState({ gift: e.target.value });
   };
 
+  updateName = e => {
+    this.setState({ name: e.target.value });
+  };
+
   onToken = async (res, createFundTransaction) => {
-    const { amount, gift } = this.state;
-    await createFundTransaction({ variables: { token: res.id, amount, gift } });
+    const { amount, gift, name } = this.state;
+    await createFundTransaction({ variables: { token: res.id, amount, gift, name } });
     navigate('/history');
   };
 
   render() {
-    const { amount } = this.state;
+    const { amount, name } = this.state;
     return (
       <Layout>
         <SEO title="Add Funds" keywords={[`gatsby`, `application`, `react`]} />
@@ -79,6 +84,20 @@ class AddFundsPage extends Component {
               <Mutation mutation={CREATE_TRANSACTION_MUTATION}>
                 {(createFundTransaction, { loading, error }) => (
                   <>
+                    {!data.me && (
+                      <Fieldset disabled={loading} aria-busy={loading}>
+                        <Label htmlFor="name">
+                          <Input
+                            type="text"
+                            name="name"
+                            id="name"
+                            value={name}
+                            onChange={this.updateName}
+                            placeholder="Name"
+                          />
+                        </Label>
+                      </Fieldset>
+                    )}
                     <Fieldset disabled={loading} aria-busy={loading}>
                       <RadioLabel htmlFor="op1">
                         <RadioInput
