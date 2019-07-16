@@ -38,3 +38,17 @@ export const GUESTS_QUERY = gql`
     }
   }
 `;
+
+export const USER_TRANSACTION_LIST_QUERY = gql`
+  query USER_TRANSACTION_LIST_QUERY($userId: ID!) {
+    transactions(where: { user: { id: $userId } }) {
+      id
+      user {
+        id
+      }
+      price
+      gift
+      createdAt
+    }
+  }
+`;
