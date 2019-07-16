@@ -39,20 +39,10 @@ class Header extends Component {
             me = payload.data.me;
           }
           return (
-            <header>
+            <header className={isOpen}>
               <h1>
                 <Link to="/">{siteTitle}</Link>
               </h1>
-              {me && (
-                <div className="profile">
-                  <img
-                    src={`https://api.adorable.io/avatars/100/${encodeURI(me.id)}@adorable.png`}
-                    alt="Avatar"
-                    width="50"
-                    height="50"
-                  />
-                </div>
-              )}
               <div className="nav-container">
                 <div className={overlay} />
                 <nav className={isOpen}>
@@ -71,9 +61,6 @@ class Header extends Component {
                         </li>
                       </>
                     )}
-                    <li>
-                      <Link to="/">Pricing</Link>
-                    </li>
                     {/* TODO: must be logged in, must be admin */}
                     <li>
                       <Link to="/guest-management">All Guests</Link>
