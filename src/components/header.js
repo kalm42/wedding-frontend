@@ -84,7 +84,7 @@ class Header extends Component {
                           <Link to="/history">Gift History</Link>
                         </li>
                         <li>
-                          <Link to="/add-funds">Give Gift</Link>
+                          <Link to="/gift">Give Gift</Link>
                         </li>
                       </>
                     )}
