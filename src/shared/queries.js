@@ -52,3 +52,12 @@ export const USER_TRANSACTION_LIST_QUERY = gql`
     }
   }
 `;
+
+export const GIFT_STATUS_QUERY = gql`
+  query GIFT_STATUS_QUERY {
+    giftStatus {
+      gym
+      honeymoon
+    }
+  }
+`;
