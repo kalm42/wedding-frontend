@@ -79,8 +79,9 @@ class AddFundsPage extends Component {
           We would prefer no boxed gifts, but that on its own is boring. So please vote what we
           should do with the money.
         </p>
+        <GiftGraph />
         <form onSubmit={e => e.preventDefault()}>
-          <h2>What should we do?</h2>
+          <h3>What should we do?</h3>
           <User>
             {({ data }) => (
               <Mutation
@@ -127,7 +128,7 @@ class AddFundsPage extends Component {
                         Italian Honeymoon
                       </RadioLabel>
                     </Fieldset>
-                    <GiftGraph />
+                    <h3>How much do you want to give?</h3>
                     <Fieldset disabled={loading} aria-busy={loading}>
                       <RadioLabel htmlFor="a40">
                         <RadioInput
