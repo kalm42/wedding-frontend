@@ -47,6 +47,19 @@ class Header extends Component {
                 <div className={overlay} />
                 <nav className={isOpen}>
                   <ul>
+                    <li>
+                      <Link to="/gift">Give Gift</Link>
+                    </li>
+                    {me && (
+                      <li>
+                        <Link to="/history">Gift History</Link>
+                      </li>
+                    )}
+                    {me && me.permissions.includes('ADMIN') && (
+                      <li>
+                        <Link to="/guest-management">Admin</Link>
+                      </li>
+                    )}
                     {me ? (
                       <li>
                         <Signout />
@@ -58,20 +71,6 @@ class Header extends Component {
                         </li>
                         <li>
                           <Link to="/signin">Login</Link>
-                        </li>
-                      </>
-                    )}
-                    {/* TODO: must be logged in, must be admin */}
-                    <li>
-                      <Link to="/guest-management">All Guests</Link>
-                    </li>
-                    {me && (
-                      <>
-                        <li>
-                          <Link to="/history">Gift History</Link>
-                        </li>
-                        <li>
-                          <Link to="/gift">Give Gift</Link>
                         </li>
                       </>
                     )}
