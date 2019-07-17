@@ -9,6 +9,7 @@ import ErrorMessage from '../../components/ErrorMessage';
 import { LinkButton, TwoColumns } from '../../shared/styledComponents';
 import { GUESTS_QUERY } from '../../shared/queries';
 import DeleteGuest from '../../components/DeleteGuest';
+import PleaseSignIn from '../../components/PleaseSignIn';
 
 const EditButton = styled(Link)`
   text-decoration: none;
@@ -27,36 +28,38 @@ const ListGuests = () => (
       <LinkButton to="/guest-management/invite">Invite another guest</LinkButton>
       <button type="button">Send invites</button>
     </TwoColumns>
-    <Query query={GUESTS_QUERY}>
-      {({ data, loading, error }) => {
-        if (loading) return <p>Loading...</p>;
-        if (error) return <ErrorMessage error={error} />;
-        const guests = data.users;
-        return (
-          <table>
-            <thead>
-              <tr>
-                <th>Primary Guest</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {guests.map(guest => (
-                <tr key={guest.id}>
-                  <td>
-                    <Link to={`/guest-management/${guest.id}`}>{guest.name}</Link>
-                  </td>
-                  <td>
-                    <EditButton to={`/guest-management/edit/${guest.id}`}>edit</EditButton>
-                    <DeleteGuest guest={{ id: guest.id, name: guest.name }} />
-                  </td>
+    <PleaseSignIn admin>
+      <Query query={GUESTS_QUERY}>
+        {({ data, loading, error }) => {
+          if (loading) return <p>Loading...</p>;
+          if (error) return <ErrorMessage error={error} />;
+          const guests = data.users;
+          return (
+            <table>
+              <thead>
+                <tr>
+                  <th>Primary Guest</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        );
-      }}
-    </Query>
+              </thead>
+              <tbody>
+                {guests.map(guest => (
+                  <tr key={guest.id}>
+                    <td>
+                      <Link to={`/guest-management/${guest.id}`}>{guest.name}</Link>
+                    </td>
+                    <td>
+                      <EditButton to={`/guest-management/edit/${guest.id}`}>edit</EditButton>
+                      <DeleteGuest guest={{ id: guest.id, name: guest.name }} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          );
+        }}
+      </Query>
+    </PleaseSignIn>
   </Layout>
 );
 
