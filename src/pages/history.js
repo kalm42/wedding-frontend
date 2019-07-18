@@ -25,30 +25,16 @@ const history = () => {
           <User>
             {({ data: { me }, loading, error }) => {
               if (loading) {
-                return (
-                  <tr>
-                    <td>Loading...</td>
-                  </tr>
-                );
+                return <p>Loading...</p>;
               }
               if (error) {
-                return (
-                  <tr>
-                    <td>
-                      <ErrorMessage error={error} />
-                    </td>
-                  </tr>
-                );
+                return <ErrorMessage error={error} />;
               }
               return (
                 <Query query={USER_TRANSACTION_LIST_QUERY} variables={{ userId: me.id }}>
                   {({ data: { transactions }, loading, error, refetch }) => {
                     if (loading) {
-                      return (
-                        <tr>
-                          <td>Loading...</td>
-                        </tr>
-                      );
+                      return <p>Loading...</p>;
                     }
                     if (error) {
                       return <ErrorMessage error={error} />;
