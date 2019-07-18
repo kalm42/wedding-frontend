@@ -36,7 +36,11 @@ const UPDATE_USER_MUTATION = gql`
 
 class UpdateGuest extends Component {
   static propTypes = {
-    guestId: PropTypes.string.isRequired,
+    guestId: PropTypes.string,
+  };
+
+  static defaultProps = {
+    guestId: undefined,
   };
 
   save = e => {

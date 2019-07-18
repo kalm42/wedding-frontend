@@ -50,8 +50,13 @@ const UPDATE_ADDRESS_MUTATION = gql`
 
 class UpdateAddress extends Component {
   static propTypes = {
-    addressId: PropTypes.string.isRequired,
-    guestId: PropTypes.string.isRequired,
+    addressId: PropTypes.string,
+    guestId: PropTypes.string,
+  };
+
+  static defaultProps = {
+    addressId: undefined,
+    guestId: undefined,
   };
 
   save = e => {

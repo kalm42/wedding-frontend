@@ -60,7 +60,10 @@ const ViewGuest = ({ guestId }) => (
 );
 
 ViewGuest.propTypes = {
-  guestId: PropTypes.string.isRequired,
+  guestId: PropTypes.string,
+};
+ViewGuest.defaultProps = {
+  guestId: undefined,
 };
 
 export default ViewGuest;
