@@ -7,7 +7,57 @@ export const CURRENT_USER_QUERY = gql`
       email
       name
       permissions
-      balance
+    }
+  }
+`;
+
+export const USER_QUERY = gql`
+  query USER_QUERY($id: ID!) {
+    user(where: { id: $id }) {
+      id
+      name
+      email
+      guestCount
+      address {
+        id
+        line1
+        line2
+        city
+        state
+        zip
+      }
+    }
+  }
+`;
+
+export const GUESTS_QUERY = gql`
+  query GUESTS_QUERY {
+    users {
+      id
+      name
+    }
+  }
+`;
+
+export const USER_TRANSACTION_LIST_QUERY = gql`
+  query USER_TRANSACTION_LIST_QUERY($userId: ID!) {
+    transactions(where: { user: { id: $userId } }) {
+      id
+      user {
+        id
+      }
+      price
+      gift
+      createdAt
+    }
+  }
+`;
+
+export const GIFT_STATUS_QUERY = gql`
+  query GIFT_STATUS_QUERY {
+    giftStatus {
+      gym
+      honeymoon
     }
   }
 `;

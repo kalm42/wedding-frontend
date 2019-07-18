@@ -39,24 +39,27 @@ class Header extends Component {
             me = payload.data.me;
           }
           return (
-            <header>
+            <header className={isOpen}>
               <h1>
                 <Link to="/">{siteTitle}</Link>
               </h1>
-              {me && (
-                <div className="profile">
-                  <img
-                    src={`https://api.adorable.io/avatars/100/${encodeURI(me.id)}@adorable.png`}
-                    alt="Avatar"
-                    width="50"
-                    height="50"
-                  />
-                </div>
-              )}
               <div className="nav-container">
                 <div className={overlay} />
                 <nav className={isOpen}>
                   <ul>
+                    <li>
+                      <Link to="/gift">Give Gift</Link>
+                    </li>
+                    {me && (
+                      <li>
+                        <Link to="/history">Gift History</Link>
+                      </li>
+                    )}
+                    {me && me.permissions.includes('ADMIN') && (
+                      <li>
+                        <Link to="/guest-management">Admin</Link>
+                      </li>
+                    )}
                     {me ? (
                       <li>
                         <Signout />
@@ -68,19 +71,6 @@ class Header extends Component {
                         </li>
                         <li>
                           <Link to="/signin">Login</Link>
-                        </li>
-                      </>
-                    )}
-                    <li>
-                      <Link to="/">Pricing</Link>
-                    </li>
-                    {me && (
-                      <>
-                        <li>
-                          <Link to="/history">Gift History</Link>
-                        </li>
-                        <li>
-                          <Link to="/add-funds">Give Gift</Link>
                         </li>
                       </>
                     )}

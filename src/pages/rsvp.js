@@ -13,7 +13,9 @@ import {
   RadioLabel,
   RadioInput,
   SubmitButton,
+  Warning,
 } from '../shared/styledComponents';
+import { CURRENT_USER_QUERY } from '../shared/queries';
 
 const RSVP_MUTATION = gql`
   mutation RSVP_MUTATION(
@@ -57,7 +59,11 @@ class Rsvp extends Component {
       <Layout>
         <SEO title="RSVP" keywords={[`gatsby`, `application`, `react`]} />
         <h1>RSVP</h1>
-        <Mutation mutation={RSVP_MUTATION} variables={this.state}>
+        <Mutation
+          mutation={RSVP_MUTATION}
+          variables={this.state}
+          refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+        >
           {(rsvp, { error, loading }) => (
             <form
               method="post"
@@ -92,6 +98,11 @@ class Rsvp extends Component {
                     onChange={this.save}
                   />
                 </RadioLabel>
+                {rsvpAnswer === 'false' && (
+                  <Warning>
+                    <p>If you submit this you will not be able to change your mind.</p>
+                  </Warning>
+                )}
                 <Label htmlFor="rsvpToken">
                   RSVP Code
                   <Input

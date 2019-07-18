@@ -11,6 +11,7 @@ import { StaticQuery, graphql } from 'gatsby';
 
 import Header from './header';
 import Footer from './footer';
+import ErrorBoundary from './ErrorBoundary';
 import './layout.scss';
 
 const Layout = ({ children }) => (
@@ -25,11 +26,11 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <ErrorBoundary>
         <Header siteTitle={data.site.siteMetadata.title} />
         <main>{children}</main>
         <Footer />
-      </>
+      </ErrorBoundary>
     )}
   />
 );

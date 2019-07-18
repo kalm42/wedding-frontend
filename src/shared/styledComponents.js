@@ -58,7 +58,7 @@ export const SubmitButton = styled.input`
   border-radius: 0.7rem;
   border: none;
   box-shadow: var(--deepboxshadow);
-  background: linear-gradient(245deg, var(--primary-lighter), var(--primary-darker));
+  background: linear-gradient(245deg, var(--primary-lighter), var(--primary));
   text-transform: uppercase;
 
   &:active {
@@ -75,7 +75,7 @@ export const SubmitButton = styled.input`
 export const RadioInput = styled.input`
   grid-area: radio;
   margin: 0.33rem 0;
-  width: 100%;
+  width: 70%;
   border-radius: 0.7rem;
   border: none;
   box-shadow: var(--deepboxshadow);
@@ -133,9 +133,78 @@ export const Danger = styled.div`
   border-radius: 0.7rem;
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+`;
+export const Warning = styled.div`
+  padding: 2rem;
+  background: var(--warning);
+  color: var(--lightshade);
+  font-weight: 900;
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+`;
+export const Success = styled.div`
+  padding: 2rem;
+  background: var(--success);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+export const LightAccent = styled.div`
+  padding: 2rem;
+  background: var(--lightaccent);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+`;
+export const DarkAccent = styled.div`
+  padding: 2rem;
+  background: var(--darkaccent);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
 `;
 
 export const Button = styled.button`
   width: 100%;
   background: linear-gradient(245deg, var(--lightaccent-lighter), var(--lightaccent-darker));
+`;
+
+export const RemoveButton = styled.button`
+  padding: 0 1rem;
+  background: var(--danger);
+  margin: 0 1rem;
+`;
+export const CancelLink = styled(Link)`
+  padding: 0 1rem;
+  background: var(--danger);
+  margin: 0 1rem;
+`;
+
+export const TwoColumns = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
