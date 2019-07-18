@@ -34,15 +34,25 @@ class AddFundsPage extends Component {
   state = {
     amount: 8000,
     name: '',
+    valid: false,
   };
 
   updateAmount = e => {
-    this.setState({ amount: Number(e.target.value) });
+    const amount = Number(e.target.value);
+    this.setState(state => {
+      const newState = { ...state, amount };
+      const valid = this.validate(newState);
+      return { amount, valid };
+    });
   };
 
   customAmount = e => {
     const amount = Math.round(Number(e.target.value)) * 100;
-    this.setState({ amount });
+    this.setState(state => {
+      const newState = { ...state, amount };
+      const valid = this.validate(newState);
+      return { amount, valid };
+    });
   };
 
   isSelected = option => {
@@ -56,11 +66,21 @@ class AddFundsPage extends Component {
   };
 
   updateGift = e => {
-    this.setState({ gift: e.target.value });
+    const gift = e.target.value;
+    this.setState(state => {
+      const newState = { ...state, gift };
+      const valid = this.validate(newState);
+      return { gift, valid };
+    });
   };
 
   updateName = e => {
-    this.setState({ name: e.target.value });
+    const name = e.target.value;
+    this.setState(state => {
+      const newState = { ...state, name };
+      const valid = this.validate(newState);
+      return { name, valid };
+    });
   };
 
   onToken = async (res, createFundTransaction) => {
@@ -69,8 +89,19 @@ class AddFundsPage extends Component {
     navigate('/history');
   };
 
+  validate = state => {
+    const { amount, gift, loggedIn, name } = state;
+    if (amount > 999 && gift) {
+      if (!loggedIn) {
+        return !!name.length;
+      }
+      return true;
+    }
+    return false;
+  };
+
   render() {
-    const { amount, name } = this.state;
+    const { amount, name, valid, loggedIn } = this.state;
     return (
       <Layout>
         <SEO title="Add Funds" keywords={[`gatsby`, `application`, `react`]} />
@@ -80,121 +111,147 @@ class AddFundsPage extends Component {
           should do with the money.
         </p>
         <GiftGraph />
-        <form onSubmit={e => e.preventDefault()}>
-          <h3>What should we do?</h3>
-          <User>
-            {({ data }) => (
-              <Mutation
-                mutation={CREATE_TRANSACTION_MUTATION}
-                refetchQueries={[{ query: GIFT_STATUS_QUERY }]}
+        <User>
+          {({ data }) => {
+            if (data && data.me && !loggedIn) {
+              this.setState({ loggedIn: true });
+            }
+            return (
+              <form
+                onSubmit={e => {
+                  console.log('Validating');
+                  e.preventDefault();
+                  this.validate(data);
+                }}
               >
-                {(createFundTransaction, { loading, error }) => (
-                  <>
-                    {!data.me && (
+                <Mutation
+                  mutation={CREATE_TRANSACTION_MUTATION}
+                  refetchQueries={[{ query: GIFT_STATUS_QUERY }]}
+                >
+                  {(createFundTransaction, { loading, error }) => (
+                    <>
+                      {!data.me && (
+                        <>
+                          <h3>Who are you?</h3>
+                          <Fieldset disabled={loading} aria-busy={loading}>
+                            <Label htmlFor="name">
+                              <Input
+                                type="text"
+                                name="name"
+                                id="name"
+                                value={name}
+                                onChange={this.updateName}
+                                placeholder="Name"
+                                required
+                              />
+                            </Label>
+                          </Fieldset>
+                        </>
+                      )}
+                      <h3>What should we do?</h3>
                       <Fieldset disabled={loading} aria-busy={loading}>
-                        <Label htmlFor="name">
+                        <RadioLabel htmlFor="op1">
+                          <RadioInput
+                            type="radio"
+                            name="option"
+                            id="op1"
+                            value="gym"
+                            checked={this.isGiftSelected('gym')}
+                            onChange={this.updateGift}
+                            required
+                          />
+                          Gym
+                        </RadioLabel>
+                        <RadioLabel htmlFor="op2">
+                          <RadioInput
+                            type="radio"
+                            name="option"
+                            id="op2"
+                            value="honeymoon"
+                            checked={this.isGiftSelected('honeymoon')}
+                            onChange={this.updateGift}
+                            required
+                          />
+                          Italian Honeymoon
+                        </RadioLabel>
+                      </Fieldset>
+                      <h3>How much would you like to give?</h3>
+                      <Fieldset disabled={loading} aria-busy={loading}>
+                        <RadioLabel htmlFor="a40">
+                          <RadioInput
+                            type="radio"
+                            id="a40"
+                            name="amount"
+                            value="4000"
+                            checked={this.isSelected(4000)}
+                            onChange={this.updateAmount}
+                          />
+                          $40
+                        </RadioLabel>
+                        <RadioLabel htmlFor="a80">
+                          <RadioInput
+                            type="radio"
+                            id="a80"
+                            name="amount"
+                            value="8000"
+                            checked={this.isSelected(8000)}
+                            onChange={this.updateAmount}
+                          />
+                          $80
+                        </RadioLabel>
+                        <RadioLabel htmlFor="a160">
+                          <RadioInput
+                            type="radio"
+                            id="a160"
+                            name="amount"
+                            value="16000"
+                            checked={this.isSelected(16000)}
+                            onChange={this.updateAmount}
+                          />
+                          $160
+                        </RadioLabel>
+                        <Label htmlFor="num">
+                          Other
                           <Input
-                            type="text"
-                            name="name"
-                            id="name"
-                            value={name}
-                            onChange={this.updateName}
-                            placeholder="Name"
+                            type="number"
+                            name="amount"
+                            id="num"
+                            value={amount / 100}
+                            onChange={this.customAmount}
                           />
                         </Label>
                       </Fieldset>
-                    )}
-                    <Fieldset disabled={loading} aria-busy={loading}>
-                      <RadioLabel htmlFor="op1">
-                        <RadioInput
-                          type="radio"
-                          name="option"
-                          id="op1"
-                          value="gym"
-                          checked={this.isGiftSelected('gym')}
-                          onChange={this.updateGift}
+                      <StripeCheckout
+                        amount={amount}
+                        name="Kyle &amp; Shelly's Wedding"
+                        description={`Giving $${amount / 100}.`}
+                        image={`https://api.adorable.io/avatars/100/${encodeURI(
+                          data && data.me ? data.me.id : '123',
+                        )}@adorable.png`}
+                        stripeKey={STRIPE_KEY}
+                        currency="USD"
+                        email={data && data.me ? data.me.email : null}
+                        token={res => this.onToken(res, createFundTransaction)}
+                      >
+                        <SubmitButton
+                          type="submit"
+                          disabled={!valid}
+                          onClick={e => {
+                            console.log('Click');
+                            e.preventDefault();
+                            this.validate(data);
+                          }}
+                          value={loading ? 'Thank you' : 'Give'}
                         />
-                        Gym
-                      </RadioLabel>
-                      <RadioLabel htmlFor="op2">
-                        <RadioInput
-                          type="radio"
-                          name="option"
-                          id="op2"
-                          value="honeymoon"
-                          checked={this.isGiftSelected('honeymoon')}
-                          onChange={this.updateGift}
-                        />
-                        Italian Honeymoon
-                      </RadioLabel>
-                    </Fieldset>
-                    <h3>How much do you want to give?</h3>
-                    <Fieldset disabled={loading} aria-busy={loading}>
-                      <RadioLabel htmlFor="a40">
-                        <RadioInput
-                          type="radio"
-                          id="a40"
-                          name="amount"
-                          value="4000"
-                          checked={this.isSelected(4000)}
-                          onChange={this.updateAmount}
-                        />
-                        $40
-                      </RadioLabel>
-                      <RadioLabel htmlFor="a80">
-                        <RadioInput
-                          type="radio"
-                          id="a80"
-                          name="amount"
-                          value="8000"
-                          checked={this.isSelected(8000)}
-                          onChange={this.updateAmount}
-                        />
-                        $80
-                      </RadioLabel>
-                      <RadioLabel htmlFor="a160">
-                        <RadioInput
-                          type="radio"
-                          id="a160"
-                          name="amount"
-                          value="16000"
-                          checked={this.isSelected(16000)}
-                          onChange={this.updateAmount}
-                        />
-                        $160
-                      </RadioLabel>
-                      <Label htmlFor="num">
-                        Other
-                        <Input
-                          type="number"
-                          name="amount"
-                          id="num"
-                          value={amount / 100}
-                          onChange={this.customAmount}
-                        />
-                      </Label>
-                    </Fieldset>
-                    <StripeCheckout
-                      amount={amount}
-                      name="Kyle &amp; Shelly's Wedding"
-                      description={`Giving $${amount / 100}.`}
-                      image={`https://api.adorable.io/avatars/100/${encodeURI(
-                        data.me ? data.me.id : '123',
-                      )}@adorable.png`}
-                      stripeKey={STRIPE_KEY}
-                      currency="USD"
-                      email={data.me ? data.me.email : null}
-                      token={res => this.onToken(res, createFundTransaction)}
-                    >
-                      <SubmitButton type="submit" value={loading ? 'Thank you' : 'Give'} />
-                    </StripeCheckout>
-                    <ErrorMessage error={error} />
-                  </>
-                )}
-              </Mutation>
-            )}
-          </User>
-        </form>
+                      </StripeCheckout>
+                      <ErrorMessage error={error} />
+                    </>
+                  )}
+                </Mutation>
+              </form>
+            );
+          }}
+        </User>
       </Layout>
     );
   }
