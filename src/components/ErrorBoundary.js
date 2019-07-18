@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import * as Sentry from '@sentry/browser';
+import { SENTRY_DSN } from '../../config';
 
-const SENTRY_DSN = process.env.SENTRY_DSN;
 Sentry.init({ dsn: SENTRY_DSN });
 
 // Modified code from Sentry docs.

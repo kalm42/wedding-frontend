@@ -8,6 +8,8 @@ header {
   padding: 1rem 0;
   margin-bottom: 1.45rem;
   min-height: 75px;
+  max-width: calc(100vw);
+  overflow: hidden;
 
   @include min-desktop {
     grid-template-columns: 1fr 2fr;
@@ -31,6 +33,13 @@ header {
       text-decoration: none;
     }
   }
+
+  &.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }
 
 .hamburger {
@@ -51,7 +60,7 @@ header {
     position: absolute;
     height: 2px;
     width: 100%;
-    background: var(--lightaccent);
+    background: var(--lightaccent-lighter);
     opacity: 1;
     left: 0;
     transform: rotate(0deg);
@@ -103,16 +112,16 @@ header {
 }
 
 .nav-overlay {
-  position: absolute;
-  top: 43px;
-  left: calc(-100vw + 66px);
+  position: fixed;
+  top: 60px;
+  left: 0;
   z-index: 1;
   background: rgba(0, 0, 0, 0.8);
   background: linear-gradient(180deg, var(--primary), var(--lightshade));
 
   &.open {
     width: calc(100vw);
-    height: calc(100vh - 200px);
+    height: calc(100vh);
     overflow: hidden;
   }
 
@@ -172,7 +181,7 @@ nav {
         position: relative;
 
         &:hover {
-          color: var(--lightaccent);
+          color: var(--lightaccent-lighter);
         }
 
         &:after {
@@ -182,7 +191,7 @@ nav {
           height: 2px;
           left: 50%;
           position: absolute;
-          background: var(--lightaccent);
+          background: var(--lightaccent-lighter);
           transition: width 0.3s ease 0s, left 0.5s ease 0s;
           width: 0;
         }
@@ -224,7 +233,7 @@ nav {
         position: relative;
 
         &:hover {
-          color: var(--lightaccent);
+          color: var(--lightaccent-lighter);
         }
 
         &:after {
@@ -234,7 +243,7 @@ nav {
           height: 2px;
           left: 50%;
           position: absolute;
-          background: var(--lightaccent);
+          background: var(--lightaccent-lighter);
           transition: width 0.3s ease 0s, left 0.5s ease 0s;
           width: 0;
         }

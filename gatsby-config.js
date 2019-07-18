@@ -1,8 +1,12 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
-    title: `Easy Postal Service`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Kyle & Shelly's Wedding`,
+    description: `RSVP for our wedding!`,
+    author: `@kalm42 Kyle Melton`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,13 +22,21 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `kyle-shelly-wedding`,
+        short_name: `wedding`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#F2F4F0`,
+        theme_color: `#5EBFB5`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Open Sans:300', 'Dancing Script:400'],
+        },
       },
     },
     `gatsby-plugin-sass`,

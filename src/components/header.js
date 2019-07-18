@@ -5,7 +5,6 @@ import { Link } from 'gatsby';
 
 import User from './User';
 import Signout from './Signout';
-import formatMoney from '../utils/formatMoney';
 import './header.scss';
 
 class Header extends Component {
@@ -40,47 +39,38 @@ class Header extends Component {
             me = payload.data.me;
           }
           return (
-            <header>
+            <header className={isOpen}>
               <h1>
                 <Link to="/">{siteTitle}</Link>
               </h1>
-              {me && (
-                <div className="profile">
-                  <p>{formatMoney(me.balance)}</p>
-                  <img
-                    src={`https://api.adorable.io/avatars/100/${encodeURI(me.id)}@adorable.png`}
-                    alt="Avatar"
-                    width="50"
-                    height="50"
-                  />
-                </div>
-              )}
               <div className="nav-container">
                 <div className={overlay} />
                 <nav className={isOpen}>
                   <ul>
+                    <li>
+                      <Link to="/gift">Give Gift</Link>
+                    </li>
+                    {me && (
+                      <li>
+                        <Link to="/history">Gift History</Link>
+                      </li>
+                    )}
+                    {me && me.permissions.includes('ADMIN') && (
+                      <li>
+                        <Link to="/guest-management">Admin</Link>
+                      </li>
+                    )}
                     {me ? (
                       <li>
                         <Signout />
                       </li>
                     ) : (
-                      <li>
-                        <Link to="/signin">Login</Link>
-                      </li>
-                    )}
-                    <li>
-                      <Link to="/">Pricing</Link>
-                    </li>
-                    {me && (
                       <>
                         <li>
-                          <Link to="/emails">Settings</Link>
+                          <Link to="/rsvp">RSVP</Link>
                         </li>
                         <li>
-                          <Link to="/history">History</Link>
-                        </li>
-                        <li>
-                          <Link to="/add-funds">Add Funds</Link>
+                          <Link to="/signin">Login</Link>
                         </li>
                       </>
                     )}
