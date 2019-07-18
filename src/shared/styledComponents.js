@@ -133,6 +133,9 @@ export const Danger = styled.div`
   border-radius: 0.7rem;
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
 `;
 export const Warning = styled.div`
   padding: 2rem;
@@ -150,7 +153,31 @@ export const Warning = styled.div`
 export const Success = styled.div`
   padding: 2rem;
   background: var(--success);
-  color: var(--darkaccent);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  p {
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+export const LightAccent = styled.div`
+  padding: 2rem;
+  background: var(--lightaccent);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+`;
+export const DarkAccent = styled.div`
+  padding: 2rem;
+  background: var(--darkaccent);
+  color: var(--lightshade);
   border-radius: 0.7rem;
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
