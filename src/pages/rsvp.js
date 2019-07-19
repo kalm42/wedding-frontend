@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import { navigate } from 'gatsby';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -69,7 +70,8 @@ class Rsvp extends Component {
               method="post"
               onSubmit={async e => {
                 e.preventDefault();
-                rsvp();
+                await rsvp();
+                navigate('/gift');
               }}
             >
               <ErrorMessage error={error} />
