@@ -37,7 +37,7 @@ const ErrorMessage = ({ error }) => {
     <Danger>
       <p data-test="graphql-error">
         <strong>Bummer...</strong>
-        {error.message.replace(' GraphQL error: ', '')}
+        {error.message.replace('GraphQL error: ', '')}
       </p>
       <button
         onClick={() => Sentry.showReportDialog()}
