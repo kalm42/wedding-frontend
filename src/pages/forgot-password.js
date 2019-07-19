@@ -30,7 +30,7 @@ class forgotPasswordPage extends Component {
       <Layout>
         <SEO title="Reset your password" />
         <h1>Reset Your Password!</h1>
-        <p>Oh no! You forgot your password. Oh well. Enter a new password here.</p>
+        <p>Oh no! You forgot your password. Oh well. You can request to make a new one here.</p>
         <Mutation mutation={REQUEST_RESET_MUTATION} variables={this.state}>
           {(reset, { loading, error, called }) => {
             if (called) {
