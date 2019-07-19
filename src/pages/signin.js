@@ -12,9 +12,6 @@ const signinPage = () => (
     <p>Your account is the access point to add funds and restrict access to mailings.</p>
     <SignIn />
     <p>
-      No Account? <Link to="/signup">Register for one!</Link>
-    </p>
-    <p>
       Did you forget your password? <Link to="/forgot-password">Request a password reset!</Link>
     </p>
   </Layout>
