@@ -35,9 +35,8 @@ export default class passwordReset extends Component {
 
   render() {
     const { password, confirmPassword } = this.state;
-    const {
-      query: { resetToken },
-    } = this.props;
+    // eslint-disable-next-line react/destructuring-assignment
+    const resetToken = this.props.location.search.split('=')[1];
 
     return (
       <Layout>
