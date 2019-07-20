@@ -16,6 +16,7 @@ import {
   SubmitButton,
   TwoColumns,
   LinkButton,
+  Loading,
 } from '../../shared/styledComponents';
 import PleaseSignIn from '../../components/PleaseSignIn';
 
@@ -80,7 +81,7 @@ class UpdateAddress extends Component {
         <PleaseSignIn admin>
           <Query query={ADDRESS_QUERY} variables={{ id: addressId }}>
             {({ data, error, loading }) => {
-              if (loading) return <p>Loading...</p>;
+              if (loading) return <Loading />;
               if (!data || !data.address)
                 return <Error error={{ message: `No address with ID: ${addressId}.` }} />;
               if (error) return <Error error={error} />;
@@ -91,7 +92,7 @@ class UpdateAddress extends Component {
                   refetchQueries={[{ query: USER_QUERY, variables: { id: guestId } }]}
                 >
                   {(updateAddress, { loading, error }) => {
-                    if (loading) return <p>Loading...</p>;
+                    if (loading) return <Loading />;
                     return (
                       <form
                         method="post"

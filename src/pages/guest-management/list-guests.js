@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React from 'react';
 import { Query, Mutation } from 'react-apollo';
 import styled from 'styled-components';
@@ -7,7 +8,7 @@ import gql from 'graphql-tag';
 import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import ErrorMessage from '../../components/ErrorMessage';
-import { LinkButton, TwoColumns, Success } from '../../shared/styledComponents';
+import { LinkButton, TwoColumns, Success, Loading } from '../../shared/styledComponents';
 import { GUESTS_QUERY } from '../../shared/queries';
 import DeleteGuest from '../../components/DeleteGuest';
 import PleaseSignIn from '../../components/PleaseSignIn';
@@ -48,8 +49,16 @@ const ListGuests = () => (
             );
           }
           return (
-            <button type="button" disabled={loading} onClick={() => createInvitations()}>
-              Send{loading && 'ing'} invites
+            <button
+              type="button"
+              disabled={loading}
+              onClick={() => {
+                if (alert('This will mail invites to everyone! Are you sure?')) {
+                  createInvitations();
+                }
+              }}
+            >
+              Send{loading && 'ing'} invites to everyone
             </button>
           );
         }}
@@ -58,7 +67,7 @@ const ListGuests = () => (
     <PleaseSignIn admin>
       <Query query={GUESTS_QUERY}>
         {({ data, loading, error }) => {
-          if (loading) return <p>Loading...</p>;
+          if (loading) return <Loading />;
           if (error) return <ErrorMessage error={error} />;
           const guests = data.users;
           return (

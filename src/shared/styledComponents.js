@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'gatsby';
 
 export const Fieldset = styled.fieldset`
@@ -173,6 +173,26 @@ export const LightAccent = styled.div`
   border-radius: 0.7rem;
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
+`;
+export const LightAccentLighter = styled.div`
+  padding: 2rem;
+  background: var(--lightaccent-lighter);
+  color: var(--darkshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
+`;
+export const LightAccentDarker = styled.div`
+  padding: 2rem;
+  background: var(--lightaccent-darker);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
 `;
 export const DarkAccent = styled.div`
   padding: 2rem;
@@ -181,6 +201,25 @@ export const DarkAccent = styled.div`
   border-radius: 0.7rem;
   box-shadow: var(--shallowboxshadow);
   margin: 0.7rem 0;
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
+`;
+export const DarkAccentLighter = styled.div`
+  padding: 2rem;
+  background: var(--darkaccent-lighter);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
+`;
+export const DarkAccentDarker = styled.div`
+  padding: 2rem;
+  background: var(--darkaccent-darker);
+  color: var(--lightshade);
+  border-radius: 0.7rem;
+  box-shadow: var(--shallowboxshadow);
+  margin: 0.7rem 0;
+  ${props => props.center && 'display: grid; align-items: center; justify-items: center;'}
 `;
 
 export const Button = styled.button`
@@ -208,3 +247,30 @@ export const TwoColumns = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
+// START straight copy from https://codepen.io/WhizofaWiz/pen/dBLzZV?page=1
+const LoaderRoation = keyframes`
+0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); }
+`;
+
+export const Loading = styled.div`
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  animation: ${LoaderRoation} 0.8s infinite linear;
+  border-left: 3px solid rgba(114, 144, 182, 0.15);
+  border-right: 3px solid rgba(114, 144, 182, 0.15);
+  border-bottom: 3px solid rgba(114, 144, 182, 0.15);
+  border-top: 3px solid rgba(114, 144, 182, 0.8);
+  border-radius: 100%;
+`;
+// END

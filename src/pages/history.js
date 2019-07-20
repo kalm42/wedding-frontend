@@ -10,6 +10,7 @@ import User from '../components/User';
 import { USER_TRANSACTION_LIST_QUERY } from '../shared/queries';
 import PleaseSignIn from '../components/PleaseSignIn';
 import GiftGraph from '../components/GiftGraph';
+import { Loading } from '../shared/styledComponents';
 
 const history = () => {
   return (
@@ -27,7 +28,7 @@ const history = () => {
           <User>
             {({ data: { me }, loading, error }) => {
               if (loading) {
-                return <p>Loading...</p>;
+                return <Loading />;
               }
               if (error) {
                 return <ErrorMessage error={error} />;
@@ -36,7 +37,7 @@ const history = () => {
                 <Query query={USER_TRANSACTION_LIST_QUERY} variables={{ userId: me.id }}>
                   {({ data: { transactions }, loading, error, refetch }) => {
                     if (loading) {
-                      return <p>Loading...</p>;
+                      return <Loading />;
                     }
                     if (error) {
                       return <ErrorMessage error={error} />;
