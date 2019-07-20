@@ -2,7 +2,7 @@
   "name": "wedding-frontend",
   "private": true,
   "description": "The frontend for a wedding RSVP management system.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "@kalm42 Kyle Melton",
   "dependencies": {
     "@reach/router": "^1.2.1",
