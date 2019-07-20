@@ -16,7 +16,7 @@ import {
   SubmitButton,
   Warning,
 } from '../shared/styledComponents';
-import { CURRENT_USER_QUERY } from '../shared/queries';
+import { CURRENT_USER_QUERY, UNCONFIRMED_GUEST_COUNT_QUERY } from '../shared/queries';
 
 const RSVP_MUTATION = gql`
   mutation RSVP_MUTATION(
@@ -63,7 +63,7 @@ class Rsvp extends Component {
         <Mutation
           mutation={RSVP_MUTATION}
           variables={this.state}
-          refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+          refetchQueries={[{ query: CURRENT_USER_QUERY }, { query: UNCONFIRMED_GUEST_COUNT_QUERY }]}
         >
           {(rsvp, { error, loading }) => (
             <form

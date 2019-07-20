@@ -61,3 +61,9 @@ export const GIFT_STATUS_QUERY = gql`
     }
   }
 `;
+
+export const UNCONFIRMED_GUEST_COUNT_QUERY = gql`
+  query UNCONFIRMED_GUEST_COUNT_QUERY {
+    unconfirmedGuestCount
+  }
+`;
