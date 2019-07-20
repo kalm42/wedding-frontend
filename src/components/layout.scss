@@ -478,6 +478,10 @@ table {
   line-height: 1.45rem;
   border-collapse: collapse;
   width: 100%;
+  @include max-tablet {
+    display: block;
+    overflow: scroll;
+  }
 }
 fieldset {
   margin-left: 0;
