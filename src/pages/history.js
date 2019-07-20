@@ -9,6 +9,7 @@ import ErrorMessage from '../components/ErrorMessage';
 import User from '../components/User';
 import { USER_TRANSACTION_LIST_QUERY } from '../shared/queries';
 import PleaseSignIn from '../components/PleaseSignIn';
+import GiftGraph from '../components/GiftGraph';
 
 const history = () => {
   return (
@@ -20,6 +21,7 @@ const history = () => {
         gifts.
       </p>
       <div>
+        <GiftGraph />
         <h2>Transactions</h2>
         <PleaseSignIn>
           <User>

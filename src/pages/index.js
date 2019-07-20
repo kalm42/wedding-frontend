@@ -12,6 +12,7 @@ import {
   Warning,
   Danger,
 } from '../shared/styledComponents';
+import GiftGraph from '../components/GiftGraph';
 
 const IndexPage = () => (
   <>
@@ -69,7 +70,7 @@ const IndexPage = () => (
         <LinkButton to="/rsvp">RSVP</LinkButton>
       </div>
 
-      <div>
+      {/* <div>
         <h2>RSVP Status</h2>
         <p>You are going to our wedding!</p>
 
@@ -78,7 +79,7 @@ const IndexPage = () => (
         <p>
           You generously have given us $100 towards our home gym, and $20 towards our honeymoon.
         </p>
-      </div>
+      </div> */}
 
       <div>
         <h2>Our Wedding Day</h2>
@@ -105,13 +106,17 @@ const IndexPage = () => (
             should do with the money.
           </p>
           <LinkButton to="/gift">Give Gift</LinkButton>
+          <GiftGraph />
         </DarkAccent>
         <LightAccent>
           <h2>FAQ</h2>
           <p>
             <strong>What should I wear?</strong>
           </p>
-          <p>I&rsquo;d start with clothes. From there it&rsquo;s up to you.</p>
+          <p>
+            I&rsquo;d start with clothes. From there it&rsquo;s up to you. But really, it&rsquo;s
+            business casual.
+          </p>
           <p>
             <strong>Are you expecting gifts?</strong>
           </p>

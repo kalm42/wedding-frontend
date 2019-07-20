@@ -110,6 +110,7 @@ class AddFundsPage extends Component {
           We would prefer no boxed gifts, but that on its own is boring. So please vote what we
           should do with the money.
         </p>
+        <p>You can give can give to one, or both, or if your side is losing you can give again.</p>
         <GiftGraph />
         <User>
           {({ data }) => {
@@ -182,33 +183,33 @@ class AddFundsPage extends Component {
                             type="radio"
                             id="a40"
                             name="amount"
-                            value="4000"
-                            checked={this.isSelected(4000)}
+                            value="5000"
+                            checked={this.isSelected(5000)}
                             onChange={this.updateAmount}
                           />
-                          $40
+                          $50
                         </RadioLabel>
                         <RadioLabel htmlFor="a80">
                           <RadioInput
                             type="radio"
                             id="a80"
                             name="amount"
-                            value="8000"
-                            checked={this.isSelected(8000)}
+                            value="10000"
+                            checked={this.isSelected(10000)}
                             onChange={this.updateAmount}
                           />
-                          $80
+                          $100
                         </RadioLabel>
                         <RadioLabel htmlFor="a160">
                           <RadioInput
                             type="radio"
                             id="a160"
                             name="amount"
-                            value="16000"
-                            checked={this.isSelected(16000)}
+                            value="15000"
+                            checked={this.isSelected(15000)}
                             onChange={this.updateAmount}
                           />
-                          $160
+                          $150
                         </RadioLabel>
                         <Label htmlFor="num">
                           Other
