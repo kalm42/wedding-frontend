@@ -6,6 +6,7 @@ export const CURRENT_USER_QUERY = gql`
       id
       email
       name
+      guestCount
       permissions
     }
   }
@@ -40,8 +41,8 @@ export const GUESTS_QUERY = gql`
 `;
 
 export const USER_TRANSACTION_LIST_QUERY = gql`
-  query USER_TRANSACTION_LIST_QUERY($userId: ID!) {
-    transactions(where: { user: { id: $userId } }) {
+  query USER_TRANSACTION_LIST_QUERY {
+    transactions {
       id
       user {
         id
