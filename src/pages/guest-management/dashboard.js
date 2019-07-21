@@ -8,6 +8,7 @@ import {
   DarkAccent,
   LightAccentLighter,
   DarkAccentDarker,
+  LinkButton,
 } from '../../shared/styledComponents';
 import NoRSVPList from '../../components/NoRSVPList';
 import RSVPList from '../../components/RSVPList';
@@ -26,6 +27,7 @@ const Dashboard = () => {
       <PleaseSignIn admin>
         <DarkAccentDarker>
           <h2>Guests</h2>
+          <LinkButton to="/guest-management/guests">Guest Management</LinkButton>
           <TwoColumns>
             <DarkAccent>
               <h3>Have Not RSVP&rsquo;d</h3>
