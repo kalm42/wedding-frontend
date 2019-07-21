@@ -18,6 +18,9 @@ const ViewGuest = ({ guestId }) => (
         {({ data, error, loading }) => {
           if (loading) return <Loading />;
           if (error) return <Error error={error} />;
+          if (!data.user) {
+            return <Error error={{ message: `There is no user with the id of '${guestId}'.` }} />;
+          }
           return (
             <TwoColumns>
               <div>
