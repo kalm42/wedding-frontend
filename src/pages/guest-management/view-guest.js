@@ -6,7 +6,7 @@ import Layout from '../../components/layout';
 import SEO from '../../components/seo';
 import Error from '../../components/ErrorMessage';
 import { USER_QUERY } from '../../shared/queries';
-import { LinkButton, TwoColumns } from '../../shared/styledComponents';
+import { LinkButton, TwoColumns, Loading } from '../../shared/styledComponents';
 import PleaseSignIn from '../../components/PleaseSignIn';
 
 const ViewGuest = ({ guestId }) => (
@@ -16,8 +16,11 @@ const ViewGuest = ({ guestId }) => (
     <PleaseSignIn admin>
       <Query query={USER_QUERY} variables={{ id: guestId }}>
         {({ data, error, loading }) => {
-          if (loading) return <p>Loading...</p>;
+          if (loading) return <Loading />;
           if (error) return <Error error={error} />;
+          if (!data.user) {
+            return <Error error={{ message: `There is no user with the id of '${guestId}'.` }} />;
+          }
           return (
             <TwoColumns>
               <div>

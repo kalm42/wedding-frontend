@@ -6,6 +6,7 @@ import ListGuests from './list-guests';
 import ViewGuest from './view-guest';
 import UpdateAddress from './update-address';
 import AddGuest from './add-guest';
+import Dashboard from './dashboard';
 
 const index = () => {
   return (
@@ -16,7 +17,8 @@ const index = () => {
           <UpdateGuest path="guest-management/edit/:guestId" />
           <UpdateAddress path="guest-management/address/:guestId/:addressId" />
           <ViewGuest path="guest-management/:guestId" />
-          <ListGuests path="guest-management/" />
+          <ListGuests path="guest-management/guests" />
+          <Dashboard path="guest-management/" />
         </Router>
       )}
     </Location>

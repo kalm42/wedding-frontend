@@ -17,15 +17,34 @@ import {
   RadioLabel,
   RadioInput,
   SubmitButton,
+  DarkAccent,
 } from '../shared/styledComponents';
 import { STRIPE_KEY } from '../../config';
 
 const CREATE_TRANSACTION_MUTATION = gql`
-  mutation CREATE_TRANSACTION_MUTATION($token: String!, $amount: Int!, $gift: String!) {
-    createFundTransaction(token: $token, amount: $amount, gift: $gift) {
+  mutation CREATE_TRANSACTION_MUTATION(
+    $token: String!
+    $amount: Int!
+    $gift: String!
+    $name: String
+    $line1: String
+    $line2: String
+    $city: String
+    $state: String
+    $zip: String
+  ) {
+    createFundTransaction(
+      token: $token
+      amount: $amount
+      gift: $gift
+      name: $name
+      line1: $line1
+      line2: $line2
+      city: $city
+      state: $state
+      zip: $zip
+    ) {
       id
-      type
-      price
     }
   }
 `;
@@ -74,34 +93,30 @@ class AddFundsPage extends Component {
     });
   };
 
-  updateName = e => {
-    const name = e.target.value;
-    this.setState(state => {
-      const newState = { ...state, name };
-      const valid = this.validate(newState);
-      return { name, valid };
-    });
+  save = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   onToken = async (res, createFundTransaction) => {
-    const { amount, gift, name } = this.state;
-    await createFundTransaction({ variables: { token: res.id, amount, gift, name } });
+    const { amount, gift, name, line1, line2, city, state, zip } = this.state;
+    console.log('The state: ', this.state);
+    await createFundTransaction({
+      variables: { token: res.id, amount, gift, name, line1, line2, city, state, zip },
+    });
     navigate('/history');
   };
 
   validate = state => {
-    const { amount, gift, loggedIn, name } = state;
+    const { amount, gift } = state;
     if (amount > 999 && gift) {
-      if (!loggedIn) {
-        return !!name.length;
-      }
       return true;
     }
     return false;
   };
 
   render() {
-    const { amount, name, valid, loggedIn } = this.state;
+    const { amount, name, valid, loggedIn, line1, line2, city, state, zip } = this.state;
     return (
       <Layout>
         <SEO title="Add Funds" keywords={[`gatsby`, `application`, `react`]} />
@@ -110,6 +125,7 @@ class AddFundsPage extends Component {
           We would prefer no boxed gifts, but that on its own is boring. So please vote what we
           should do with the money.
         </p>
+        <p>You can give can give to one, or both, or if your side is losing you can give again.</p>
         <GiftGraph />
         <User>
           {({ data }) => {
@@ -119,7 +135,6 @@ class AddFundsPage extends Component {
             return (
               <form
                 onSubmit={e => {
-                  console.log('Validating');
                   e.preventDefault();
                   this.validate(data);
                 }}
@@ -132,7 +147,8 @@ class AddFundsPage extends Component {
                     <>
                       {!data.me && (
                         <>
-                          <h3>Who are you?</h3>
+                          <h3>Please let us know who you are.</h3>
+                          <p>If you would like to make your gift anonymously that is okay too.</p>
                           <Fieldset disabled={loading} aria-busy={loading}>
                             <Label htmlFor="name">
                               <Input
@@ -140,9 +156,58 @@ class AddFundsPage extends Component {
                                 name="name"
                                 id="name"
                                 value={name}
-                                onChange={this.updateName}
+                                onChange={this.save}
                                 placeholder="Name"
-                                required
+                              />
+                            </Label>
+                            <Label htmlFor="line1">
+                              Street
+                              <Input
+                                type="text"
+                                name="line1"
+                                id="line1"
+                                value={line1}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="line2">
+                              Apt/Ste Number
+                              <Input
+                                type="text"
+                                name="line2"
+                                id="line2"
+                                value={line2}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="city">
+                              City
+                              <Input
+                                type="text"
+                                name="city"
+                                id="city"
+                                value={city}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="state">
+                              State
+                              <Input
+                                type="text"
+                                name="state"
+                                id="state"
+                                value={state}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="zip">
+                              Zip Code
+                              <Input
+                                type="text"
+                                name="zip"
+                                id="zip"
+                                value={zip}
+                                onChange={this.save}
                               />
                             </Label>
                           </Fieldset>
@@ -182,33 +247,33 @@ class AddFundsPage extends Component {
                             type="radio"
                             id="a40"
                             name="amount"
-                            value="4000"
-                            checked={this.isSelected(4000)}
+                            value="5000"
+                            checked={this.isSelected(5000)}
                             onChange={this.updateAmount}
                           />
-                          $40
+                          $50
                         </RadioLabel>
                         <RadioLabel htmlFor="a80">
                           <RadioInput
                             type="radio"
                             id="a80"
                             name="amount"
-                            value="8000"
-                            checked={this.isSelected(8000)}
+                            value="10000"
+                            checked={this.isSelected(10000)}
                             onChange={this.updateAmount}
                           />
-                          $80
+                          $100
                         </RadioLabel>
                         <RadioLabel htmlFor="a160">
                           <RadioInput
                             type="radio"
                             id="a160"
                             name="amount"
-                            value="16000"
-                            checked={this.isSelected(16000)}
+                            value="15000"
+                            checked={this.isSelected(15000)}
                             onChange={this.updateAmount}
                           />
-                          $160
+                          $150
                         </RadioLabel>
                         <Label htmlFor="num">
                           Other
@@ -236,11 +301,7 @@ class AddFundsPage extends Component {
                         <SubmitButton
                           type="submit"
                           disabled={!valid}
-                          onClick={e => {
-                            console.log('Click');
-                            e.preventDefault();
-                            this.validate(data);
-                          }}
+                          onClick={e => e.preventDefault()}
                           value={loading ? 'Thank you' : 'Give'}
                         />
                       </StripeCheckout>
@@ -248,6 +309,12 @@ class AddFundsPage extends Component {
                     </>
                   )}
                 </Mutation>
+                <DarkAccent>
+                  <p>
+                    Once you see the green check mark your card will be charged. If you get any
+                    errors feel free to call us and we can sort it out.
+                  </p>
+                </DarkAccent>
               </form>
             );
           }}
