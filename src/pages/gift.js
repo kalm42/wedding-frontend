@@ -17,15 +17,34 @@ import {
   RadioLabel,
   RadioInput,
   SubmitButton,
+  DarkAccent,
 } from '../shared/styledComponents';
 import { STRIPE_KEY } from '../../config';
 
 const CREATE_TRANSACTION_MUTATION = gql`
-  mutation CREATE_TRANSACTION_MUTATION($token: String!, $amount: Int!, $gift: String!) {
-    createFundTransaction(token: $token, amount: $amount, gift: $gift) {
+  mutation CREATE_TRANSACTION_MUTATION(
+    $token: String!
+    $amount: Int!
+    $gift: String!
+    $name: String
+    $line1: String
+    $line2: String
+    $city: String
+    $state: String
+    $zip: String
+  ) {
+    createFundTransaction(
+      token: $token
+      amount: $amount
+      gift: $gift
+      name: $name
+      line1: $line1
+      line2: $line2
+      city: $city
+      state: $state
+      zip: $zip
+    ) {
       id
-      type
-      price
     }
   }
 `;
@@ -81,6 +100,7 @@ class AddFundsPage extends Component {
 
   onToken = async (res, createFundTransaction) => {
     const { amount, gift, name, line1, line2, city, state, zip } = this.state;
+    console.log('The state: ', this.state);
     await createFundTransaction({
       variables: { token: res.id, amount, gift, name, line1, line2, city, state, zip },
     });
@@ -146,7 +166,6 @@ class AddFundsPage extends Component {
                                 type="text"
                                 name="line1"
                                 id="line1"
-                                required
                                 value={line1}
                                 onChange={this.save}
                               />
@@ -167,7 +186,6 @@ class AddFundsPage extends Component {
                                 type="text"
                                 name="city"
                                 id="city"
-                                required
                                 value={city}
                                 onChange={this.save}
                               />
@@ -178,7 +196,6 @@ class AddFundsPage extends Component {
                                 type="text"
                                 name="state"
                                 id="state"
-                                required
                                 value={state}
                                 onChange={this.save}
                               />
@@ -189,7 +206,6 @@ class AddFundsPage extends Component {
                                 type="text"
                                 name="zip"
                                 id="zip"
-                                required
                                 value={zip}
                                 onChange={this.save}
                               />
@@ -285,11 +301,7 @@ class AddFundsPage extends Component {
                         <SubmitButton
                           type="submit"
                           disabled={!valid}
-                          onClick={e => {
-                            console.log('Click');
-                            e.preventDefault();
-                            this.validate(data);
-                          }}
+                          onClick={e => e.preventDefault()}
                           value={loading ? 'Thank you' : 'Give'}
                         />
                       </StripeCheckout>
@@ -297,6 +309,12 @@ class AddFundsPage extends Component {
                     </>
                   )}
                 </Mutation>
+                <DarkAccent>
+                  <p>
+                    Once you see the green check mark your card will be charged. If you get any
+                    errors feel free to call us and we can sort it out.
+                  </p>
+                </DarkAccent>
               </form>
             );
           }}
