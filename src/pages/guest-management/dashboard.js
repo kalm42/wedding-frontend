@@ -15,6 +15,8 @@ import UnconfirmedGuestCount from '../../components/UnconfirmedGuestCount';
 import ConfirmedGuestCount from '../../components/ConfirmedGuestCount';
 import GiftGraph from '../../components/GiftGraph';
 import NoInvite from '../../components/NoInvite';
+import TransactionListByGift from '../../components/TransactionListByGift';
+import GiftTotal from '../../components/GiftTotal';
 
 const Dashboard = () => {
   return (
@@ -53,55 +55,13 @@ const Dashboard = () => {
           <TwoColumns>
             <DarkAccent center>
               <h3>Gym</h3>
-              <p>Total: $100</p>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                </tbody>
-              </table>
+              <GiftTotal gift="GYM" />
+              <TransactionListByGift gift="GYM" />
             </DarkAccent>
             <DarkAccentDarker center>
               <h3>Honeymoon</h3>
-              <p>Total: $100</p>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                  <tr>
-                    <td>Bob Newhart</td>
-                    <td>100.00</td>
-                  </tr>
-                </tbody>
-              </table>
+              <GiftTotal gift="HONEYMOON" />
+              <TransactionListByGift gift="HONEYMOON" />
             </DarkAccentDarker>
           </TwoColumns>
         </LightAccentLighter>

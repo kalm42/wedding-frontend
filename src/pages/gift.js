@@ -74,34 +74,29 @@ class AddFundsPage extends Component {
     });
   };
 
-  updateName = e => {
-    const name = e.target.value;
-    this.setState(state => {
-      const newState = { ...state, name };
-      const valid = this.validate(newState);
-      return { name, valid };
-    });
+  save = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
   onToken = async (res, createFundTransaction) => {
-    const { amount, gift, name } = this.state;
-    await createFundTransaction({ variables: { token: res.id, amount, gift, name } });
+    const { amount, gift, name, line1, line2, city, state, zip } = this.state;
+    await createFundTransaction({
+      variables: { token: res.id, amount, gift, name, line1, line2, city, state, zip },
+    });
     navigate('/history');
   };
 
   validate = state => {
-    const { amount, gift, loggedIn, name } = state;
+    const { amount, gift } = state;
     if (amount > 999 && gift) {
-      if (!loggedIn) {
-        return !!name.length;
-      }
       return true;
     }
     return false;
   };
 
   render() {
-    const { amount, name, valid, loggedIn } = this.state;
+    const { amount, name, valid, loggedIn, line1, line2, city, state, zip } = this.state;
     return (
       <Layout>
         <SEO title="Add Funds" keywords={[`gatsby`, `application`, `react`]} />
@@ -120,7 +115,6 @@ class AddFundsPage extends Component {
             return (
               <form
                 onSubmit={e => {
-                  console.log('Validating');
                   e.preventDefault();
                   this.validate(data);
                 }}
@@ -133,7 +127,8 @@ class AddFundsPage extends Component {
                     <>
                       {!data.me && (
                         <>
-                          <h3>Who are you?</h3>
+                          <h3>Please let us know who you are.</h3>
+                          <p>If you would like to make your gift anonymously that is okay too.</p>
                           <Fieldset disabled={loading} aria-busy={loading}>
                             <Label htmlFor="name">
                               <Input
@@ -141,9 +136,62 @@ class AddFundsPage extends Component {
                                 name="name"
                                 id="name"
                                 value={name}
-                                onChange={this.updateName}
+                                onChange={this.save}
                                 placeholder="Name"
+                              />
+                            </Label>
+                            <Label htmlFor="line1">
+                              Street
+                              <Input
+                                type="text"
+                                name="line1"
+                                id="line1"
                                 required
+                                value={line1}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="line2">
+                              Apt/Ste Number
+                              <Input
+                                type="text"
+                                name="line2"
+                                id="line2"
+                                value={line2}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="city">
+                              City
+                              <Input
+                                type="text"
+                                name="city"
+                                id="city"
+                                required
+                                value={city}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="state">
+                              State
+                              <Input
+                                type="text"
+                                name="state"
+                                id="state"
+                                required
+                                value={state}
+                                onChange={this.save}
+                              />
+                            </Label>
+                            <Label htmlFor="zip">
+                              Zip Code
+                              <Input
+                                type="text"
+                                name="zip"
+                                id="zip"
+                                required
+                                value={zip}
+                                onChange={this.save}
                               />
                             </Label>
                           </Fieldset>
