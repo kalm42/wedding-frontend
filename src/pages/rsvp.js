@@ -60,6 +60,10 @@ class Rsvp extends Component {
       <Layout>
         <SEO title="RSVP" keywords={[`gatsby`, `application`, `react`]} />
         <h1>RSVP</h1>
+        <p>
+          Please RSVP for our wedding. If you say yes you will be asked to set a password for your
+          account.
+        </p>
         <Mutation
           mutation={RSVP_MUTATION}
           variables={this.state}
@@ -120,7 +124,7 @@ class Rsvp extends Component {
                 {rsvpAnswer === 'true' && (
                   <>
                     <Label htmlFor="guestCount">
-                      Estimated number of attendees
+                      Estimated number of attendees &#40;including yourself&#41;
                       <Input
                         type="number"
                         name="guestCount"

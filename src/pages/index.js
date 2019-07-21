@@ -13,6 +13,7 @@ import {
   Danger,
 } from '../shared/styledComponents';
 import GiftGraph from '../components/GiftGraph';
+import RSVPStatus from '../components/RSVPStatus';
 
 const IndexPage = () => (
   <>
@@ -66,20 +67,8 @@ const IndexPage = () => (
           we exchange vows and make a lasting commitment to one another.
         </p>
 
-        <p>RSVP by March 20th.</p>
-        <LinkButton to="/rsvp">RSVP</LinkButton>
+        <RSVPStatus />
       </div>
-
-      {/* <div>
-        <h2>RSVP Status</h2>
-        <p>You are going to our wedding!</p>
-
-        <p>You are bringing 2 other people.</p>
-
-        <p>
-          You generously have given us $100 towards our home gym, and $20 towards our honeymoon.
-        </p>
-      </div> */}
 
       <div>
         <h2>Our Wedding Day</h2>
