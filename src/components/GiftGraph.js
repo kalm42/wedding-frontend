@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import ErrorMessage from './ErrorMessage';
 import { GIFT_STATUS_QUERY } from '../shared/queries';
+import { Loading } from '../shared/styledComponents';
 
 const GraphContainer = styled.div`
   width: 100%;
@@ -50,7 +51,7 @@ const GiftGraph = () => {
       <Query query={GIFT_STATUS_QUERY}>
         {({ data, loading, error }) => {
           if (loading) {
-            return <p>Loading...</p>;
+            return <Loading />;
           }
           if (error) {
             return <ErrorMessage error={error} />;

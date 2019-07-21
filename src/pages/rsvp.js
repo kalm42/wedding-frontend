@@ -16,7 +16,7 @@ import {
   SubmitButton,
   Warning,
 } from '../shared/styledComponents';
-import { CURRENT_USER_QUERY } from '../shared/queries';
+import { CURRENT_USER_QUERY, UNCONFIRMED_GUEST_COUNT_QUERY } from '../shared/queries';
 
 const RSVP_MUTATION = gql`
   mutation RSVP_MUTATION(
@@ -60,10 +60,14 @@ class Rsvp extends Component {
       <Layout>
         <SEO title="RSVP" keywords={[`gatsby`, `application`, `react`]} />
         <h1>RSVP</h1>
+        <p>
+          Please RSVP for our wedding. If you say yes you will be asked to set a password for your
+          account.
+        </p>
         <Mutation
           mutation={RSVP_MUTATION}
           variables={this.state}
-          refetchQueries={[{ query: CURRENT_USER_QUERY }]}
+          refetchQueries={[{ query: CURRENT_USER_QUERY }, { query: UNCONFIRMED_GUEST_COUNT_QUERY }]}
         >
           {(rsvp, { error, loading }) => (
             <form
@@ -120,7 +124,7 @@ class Rsvp extends Component {
                 {rsvpAnswer === 'true' && (
                   <>
                     <Label htmlFor="guestCount">
-                      Estimated number of attendees
+                      Estimated number of attendees &#40;including yourself&#41;
                       <Input
                         type="number"
                         name="guestCount"

@@ -15,8 +15,9 @@ import {
   SubmitButton,
   TwoColumns,
   LinkButton,
+  Loading,
 } from '../../shared/styledComponents';
-import { USER_QUERY } from '../../shared/queries';
+import { USER_QUERY, UNCONFIRMED_GUEST_COUNT_QUERY } from '../../shared/queries';
 import PleaseSignIn from '../../components/PleaseSignIn';
 
 const UPDATE_USER_MUTATION = gql`
@@ -68,17 +69,20 @@ class UpdateGuest extends Component {
         <PleaseSignIn admin>
           <Query query={USER_QUERY} variables={{ id: guestId }}>
             {({ data, error, loading }) => {
-              if (loading) return <p>Loading...</p>;
+              if (loading) return <Loading />;
               if (!data.user) return <Error error={{ message: `No guest with ID: ${guestId}.` }} />;
               if (error) return <Error error={error} />;
               return (
                 <Mutation
                   mutation={UPDATE_USER_MUTATION}
                   variables={{ id: guestId, ...this.state }}
-                  refetchQueries={[{ query: USER_QUERY, variables: { id: guestId } }]}
+                  refetchQueries={[
+                    { query: USER_QUERY, variables: { id: guestId } },
+                    { query: UNCONFIRMED_GUEST_COUNT_QUERY },
+                  ]}
                 >
                   {(updateUser, { loading, error }) => {
-                    if (loading) return <p>Loading...</p>;
+                    if (loading) return <Loading />;
                     return (
                       <form method="post" onSubmit={async e => this.updateGuest(e, updateUser)}>
                         <Fieldset disabled={loading} aria-busy={loading}>

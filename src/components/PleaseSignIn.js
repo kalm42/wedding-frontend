@@ -4,12 +4,12 @@ import PropTypes from 'prop-types';
 
 import { CURRENT_USER_QUERY } from '../shared/queries';
 import SignIn from './SignIn';
-import { Warning } from '../shared/styledComponents';
+import { Warning, Loading } from '../shared/styledComponents';
 
 const PleaseSignIn = props => (
   <Query query={CURRENT_USER_QUERY}>
     {({ data, loading }) => {
-      if (loading) return <p>Loading...</p>;
+      if (loading) return <Loading />;
       if (!data || !data.me || (props.admin && !data.me.permissions.includes('ADMIN'))) {
         return (
           <Warning>
