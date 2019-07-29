@@ -30,6 +30,9 @@ const GiftTotal = ({ gift }) => (
         return <Loading />;
       }
       const { allUsersTransactions } = data;
+      if (allUsersTransactions.length < 1) {
+        return <p>No transactions yet.</p>;
+      }
       return (
         <p>
           Total: $

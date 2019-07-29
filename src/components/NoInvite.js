@@ -40,6 +40,13 @@ const NoInvite = () => {
           return <ErrorMessage error={error} />;
         }
         const { noInvite } = data;
+        if (noInvite.length < 2) {
+          return (
+            <div>
+              <p>No users, other than admin are missing an invite.</p>
+            </div>
+          );
+        }
         return (
           <table>
             <thead>

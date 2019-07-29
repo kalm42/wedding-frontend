@@ -30,6 +30,13 @@ const TransactionListByGift = ({ gift }) => (
         return <Loading />;
       }
       const { allUsersTransactions } = data;
+      if (allUsersTransactions.length < 1) {
+        return (
+          <div>
+            <p>No guests have made a gift.</p>
+          </div>
+        );
+      }
       return (
         <table>
           <thead>

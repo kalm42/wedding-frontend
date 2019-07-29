@@ -25,6 +25,13 @@ const RSVPList = () => {
           return <ErrorMessage error={error} />;
         }
         const { RSVP } = data;
+        if (RSVP.length < 1) {
+          return (
+            <div>
+              <p>No guests have RSVP&rsquo;d.</p>
+            </div>
+          );
+        }
         return (
           <table>
             <thead>
