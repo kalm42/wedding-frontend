@@ -107,6 +107,15 @@ const IndexPage = () => (
             business casual.
           </p>
           <p>
+            <strong>Are children welcome?</strong>
+          </p>
+          <p>
+            There will be alcohol served at the wedding along with alcoholic ice cream. In the
+            interest of the enjoyment for everyone please leave your younglings in the care of
+            capable adults. Or - bring a child and tell them they can&rsquo;t have ice cream and see
+            how well that goes.
+          </p>
+          <p>
             <strong>Are you expecting gifts?</strong>
           </p>
           <p>Not at all. We&rsquo;re only hoping that you join us.</p>
