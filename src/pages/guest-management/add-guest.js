@@ -19,6 +19,7 @@ const INVITE_GUEST_MUTATION = gql`
     $city: String!
     $state: String!
     $zip: String!
+    $guestCount: Int!
   ) {
     inviteGuest(
       name: $name
@@ -28,6 +29,7 @@ const INVITE_GUEST_MUTATION = gql`
       city: $city
       state: $state
       zip: $zip
+      guestCount: $guestCount
     ) {
       message
     }
@@ -38,7 +40,7 @@ class AddGuest extends Component {
   state = {
     name: '',
     email: '',
-    guestCount: '0',
+    guestCount: 0,
     line1: '',
     line2: '',
     city: '',
@@ -49,14 +51,18 @@ class AddGuest extends Component {
 
   save = e => {
     const { name, value } = e.target;
-    this.setState({ [name]: value });
+    if (name === 'guestCount') {
+      this.setState({ [name]: Number(value) });
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
   reset = () =>
     this.setState({
       name: '',
       email: '',
-      guestCount: '0',
+      guestCount: 0,
       line1: '',
       line2: '',
       city: '',

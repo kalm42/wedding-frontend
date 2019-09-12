@@ -78,7 +78,6 @@ const UserDetail = props => {
       address: { line1, city, state, zip },
     },
   } = props;
-  console.log({ props });
   return (
     <Mutation
       mutation={CREATE_INVITE_MUTATION}
