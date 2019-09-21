@@ -50,6 +50,15 @@ class Header extends Component {
                     <li>
                       <Link to="/gift">Give Gift</Link>
                     </li>
+                    <li>
+                      <Link to="/our-story">Our Story</Link>
+                    </li>
+                    <li>
+                      <Link to="/things-to-do">Things To Do</Link>
+                    </li>
+                    <li>
+                      <Link to="/travel">Accomodations</Link>
+                    </li>
                     {me && (
                       <li>
                         <Link to="/history">Gift History</Link>
