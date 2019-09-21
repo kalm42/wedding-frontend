@@ -2,11 +2,11 @@ import React from 'react';
 import Img from 'gatsby-image';
 import { StaticQuery, graphql } from 'gatsby';
 
-const KSImage22 = () => (
+const KSImage022 = () => (
   <StaticQuery
     query={graphql`
-      query KYLE_AND_SHELL_22_IMAGE_QUERY {
-        file(relativePath: { regex: "/img-22/" }) {
+      query KYLE_AND_SHELL_022_IMAGE_QUERY {
+        file(relativePath: { regex: "/img-022/" }) {
           childImageSharp {
             fluid(maxWidth: 300) {
               ...GatsbyImageSharpFluid
@@ -19,4 +19,4 @@ const KSImage22 = () => (
   />
 );
 
-export default KSImage22;
+export default KSImage022;
