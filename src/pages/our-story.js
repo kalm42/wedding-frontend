@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import SEO from '../components/seo';
 import Layout from '../components/layout';
 import { TwoColumns } from '../shared/styledComponents';
@@ -28,12 +29,18 @@ import KSImage023 from '../components/images/KSImage023';
 import KSImage024 from '../components/images/KSImage024';
 import KSImage025 from '../components/images/KSImage025';
 
+const ScrollImages = styled.div`
+  max-height: calc(80vh);
+  overflow-x: scroll;
+`;
+
 const OurStory = () => {
   return (
     <Layout>
       <SEO title="Our Story" keywords={[`wedding`, `engagement story`]} />
       <TwoColumns>
         <div>
+          <h1>Our Story</h1>
           <p>
             Kyle and Shelly met on the dating app Coffee Meets Bagel. Kyle made her laugh with a
             cute joke…and they seemed to hit it off. So they met at a local Starbucks and the rest
@@ -60,7 +67,7 @@ const OurStory = () => {
             to celebrate with us!
           </p>
         </div>
-        <div>
+        <ScrollImages>
           <KSImage000 />
           <KSImage001 />
           <KSImage002 />
@@ -86,7 +93,7 @@ const OurStory = () => {
           <KSImage023 />
           <KSImage024 />
           <KSImage025 />
-        </div>
+        </ScrollImages>
       </TwoColumns>
     </Layout>
   );

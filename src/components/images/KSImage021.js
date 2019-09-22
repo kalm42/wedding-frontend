@@ -8,7 +8,7 @@ const KSImage021 = () => (
       query KYLE_AND_SHELL_021_IMAGE_QUERY {
         file(relativePath: { regex: "/img-021/" }) {
           childImageSharp {
-            fluid(maxWidth: 300) {
+            fluid(maxWidth: 600) {
               ...GatsbyImageSharpFluid
             }
           }
