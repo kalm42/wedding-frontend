@@ -159,7 +159,7 @@ nav {
       width: calc(100vw);
       height: calc(100vh - 100px);
       visibility: visible;
-      z-index: 2;
+      z-index: 999;
       opacity: 1;
 
       ul {
