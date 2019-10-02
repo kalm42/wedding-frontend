@@ -130,7 +130,7 @@ const IndexPage = () => (
           </p>
           <p>
             I would highly suggest seeing if you can stay a day or two longer in Asheville. They
-            have a vibrant art scene and more brweries then you can shake a stick at. I&rsquo;ve
+            have a vibrant art scene and more breweries then you can shake a stick at. I&rsquo;ve
             tried.
           </p>
           <p>

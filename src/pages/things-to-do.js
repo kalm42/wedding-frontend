@@ -132,7 +132,7 @@ const ThingsToDo = () => {
               Tour.
             </p>
             <p>
-              Shelly, and I went on this with Shelly&amp;s parents, specifically the beer tour. It
+              Shelly, and I went on this with Shelly&apos;s parents, specifically the beer tour. It
               was a great time, almost ended with Shelly getting a sister-wife. Make sure to ask
               Shelly about that.
             </p>
