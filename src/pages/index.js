@@ -74,12 +74,12 @@ const IndexPage = () => (
         <h2>Our Wedding Day</h2>
         <p>
           At 6pm, we will meet you inside Haiku I Do for Our wedding ceremony which will start at
-          6:30pm. After a misleadingly short ceremony, we will raise A toast to celebrate officially
+          6:30pm. After a misleadingly short ceremony, we will raise a toast to celebrate officially
           becoming husband &amp; wife.
         </p>
         <p>
-          From there, we will immediately start the reception at the same location. We will dine on
-          food and stuff. Drink beverages that are liquid and be merry.
+          From there, we will immediately start the reception at the same location. We will eat
+          southern BBQ and imbibe in adult beverages and be merry.
         </p>
         <p>
           There will more than likely be an after party at one of the many local breweries. If you

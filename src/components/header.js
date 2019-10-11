@@ -48,6 +48,9 @@ class Header extends Component {
                 <nav className={isOpen}>
                   <ul>
                     <li>
+                      <Link to="/">Home</Link>
+                    </li>
+                    <li>
                       <Link to="/gift">Give Gift</Link>
                     </li>
                     <li>
