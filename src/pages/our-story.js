@@ -32,7 +32,6 @@ import KSImage025 from '../components/images/KSImage025';
 const ScrollImages = styled.div`
   max-height: calc(80vh);
   overflow-x: scroll;
-  z-index: -1;
 `;
 
 const OurStory = () => {
