@@ -160,16 +160,17 @@ nav {
   &.open {
     @include max-desktop {
       position: fixed;
-      top: calc(20vh);
-      left: 0;
+      top: calc(10vh);
+      left: calc(5vw);
       width: calc(100vw);
       height: calc(100vh - 100px);
       visibility: visible;
       z-index: 999;
       opacity: 1;
+      overflow: scroll;
 
       ul {
-        padding: 60px;
+        padding: 0;
       }
 
       li {
