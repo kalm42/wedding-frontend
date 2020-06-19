@@ -21,40 +21,19 @@ const IndexPage = () => (
     <Layout>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <h4>
-        {isBefore(new Date(2020, 6, 20, 18, 0, 0), Date.now())
-          ? `We got married ${' '}
-        ${distanceInWordsToNow(new Date(2020, 6, 20, 18, 0, 0), { includeSeconds: true })}`
-          : `We're getting married in${' '}
-      ${distanceInWordsToNow(new Date(2020, 6, 20, 18, 0, 0), { includeSeconds: true })}`}
+        Our wedding has been postponed until COVID19 is no longer a concern to the welfare of our
+        friends and family.
       </h4>
       <TwoColumns>
         <LightAccent>
           <h2>Where</h2>
-          <address>
-            26 Sweeten Creek Rd. <br />
-            Asheville, NC 28803-2318
-          </address>
+          <address>TBD</address>
         </LightAccent>
         <DarkAccent>
           <h2>When</h2>
-          <p>
-            June 20, 2020 <br />
-            6:00pm - 10:00pm
-          </p>
+          <p>TBD</p>
         </DarkAccent>
       </TwoColumns>
-
-      {isBefore(new Date(2020, 6, 20, 18, 0, 0), Date.now()) && (
-        <Warning>
-          <h2>Urgent Day of Question?</h2>
-          <p>Don&apos;t call us. I mean you can, but please we got a lot going on.</p>
-          <Danger>
-            <p>
-              <a href="tel:+9512127174">(951)212-7174</a>
-            </p>
-          </Danger>
-        </Warning>
-      )}
 
       <div>
         <h2>Come celebrate with us!</h2>
@@ -73,8 +52,8 @@ const IndexPage = () => (
       <div>
         <h2>Our Wedding Day</h2>
         <p>
-          At 6pm, we will meet you inside Haiku I Do for Our wedding ceremony which will start at
-          6:30pm. After a misleadingly short ceremony, we will raise a toast to celebrate officially
+          At TBD, we will meet you inside TBD for Our wedding ceremony which will start at TBD.
+          After a misleadingly short ceremony, we will raise a toast to celebrate officially
           becoming husband &amp; wife.
         </p>
         <p>
